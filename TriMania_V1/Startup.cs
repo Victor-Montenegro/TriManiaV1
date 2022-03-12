@@ -20,9 +20,13 @@ namespace TriMania_V1
         public void ConfigureServices(IServiceCollection services)
         {
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
-            services.AddControllers();
+
+            services.AddControllers().ConfigureApiBehaviorOptions(options => {
+                options.SuppressModelStateInvalidFilter = true;
+            });
 
             services.AddDbContext(connectionString);
+            services.ConfigureMedaitRSetup();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

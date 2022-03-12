@@ -5,8 +5,36 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\Handlers\" />
-    <Folder Include="Commands\Responses\" />
+    <Folder Include="Language\API\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Language\TriManiaV1\AddressMsg.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AddressMsg.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Language\TriManiaV1\UserMsg.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UserMsg.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Language\TriManiaV1\AddressMsg.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddressMsg.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Language\TriManiaV1\UserMsg.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserMsg.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>
