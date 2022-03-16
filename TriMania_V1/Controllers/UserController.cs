@@ -22,7 +22,10 @@ namespace TriMania_V1.Controllers
             {
                 CreateUserResponse response = await handler.Send(command);
 
-                return Ok(response);
+                if (response.Success)
+                    return Ok(response);
+                else
+                    return BadRequest(response);
             }
             catch (Exception ex)
             {

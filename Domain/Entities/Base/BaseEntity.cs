@@ -8,6 +8,6 @@ namespace Domain.Entities.Base
 
         public DateTime CreateDate { get; set; }
 
-        public DateTime DeletionDate { get; set; }
+        public DateTime? DeletionDate { get; set; }
     }
 }

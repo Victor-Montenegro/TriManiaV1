@@ -24,9 +24,33 @@ namespace Infrastructure.Repository
             {
                 //int count = await _dataSet.CountAsync();
 
-                var result = await _dataSet.Skip(page * 10).Take(10).AsNoTracking().ToListAsync();
+                var result = await _dataSet.Where(x => x.DeletionDate == null).Skip(page * 10).Take(10).AsNoTracking().ToListAsync();
 
                 return result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<User> GetUserByCpfOrCnpj(string taxNumber)
+        {
+            try
+            {
+                return await _dataSet.Where(x => x.Cpf == taxNumber && x.DeletionDate == null).AsNoTracking().FirstOrDefaultAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<User> GetUserByEmail(string email)
+        {
+            try
+            {
+                return await _dataSet.Where(x => x.Email == email && x.DeletionDate == null).AsNoTracking().FirstOrDefaultAsync();
             }
             catch (Exception ex)
             {
