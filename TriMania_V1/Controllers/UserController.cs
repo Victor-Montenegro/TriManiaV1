@@ -1,5 +1,6 @@
 ﻿using Domain.Commands.Requests;
 using Domain.Commands.Responses;
+using Domain.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -38,11 +39,17 @@ namespace TriMania_V1.Controllers
         [Route("getusers/{page:int}")]
         [Authorize(Roles ="Manager")]
         [ErrorsValidation]
-        public async Task<IActionResult> GetAllUser(int page)
+        public async Task<IActionResult> GetAllUser(int page,
+            [FromServices]IUserRepository userRepository )
         {
             try
             {
-                return Ok("users");
+                var users = await userRepository.GetAllByPage(page);
+
+                if (users is null)
+                    return BadRequest("");
+
+                return Ok(users);
             }
             catch (Exception ex)
             {

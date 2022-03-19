@@ -7,6 +7,9 @@ using CrossCutting.DependencyInjection;
 using DomainService.Services.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using System;
+using System.Collections.Generic;
 
 namespace TriMania_V1
 {
@@ -53,6 +56,38 @@ namespace TriMania_V1
                 };
             });
 
+            services.AddSwaggerGen(x =>
+                {
+                    x.SwaggerDoc("Versao01", new OpenApiInfo
+                    {
+                        Version = "TMv1",
+                        Title = "TriMania - TriMania",
+                    });
+
+                    x.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                    {
+                        Description = "Conecte utilizando Token JWT",
+                        Name = "Authorization",
+                        In = ParameterLocation.Header,
+                        Type = SecuritySchemeType.ApiKey
+                    });
+
+                    x.AddSecurityRequirement(new OpenApiSecurityRequirement
+                    {
+                        { 
+                            new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference
+                                {
+                                    Id = "Bearer",
+                                    Type = ReferenceType.SecurityScheme
+                                }
+                            },
+                            new List<string>()
+                        }
+                    });
+                }
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,6 +97,14 @@ namespace TriMania_V1
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(x =>
+            {
+                x.SwaggerEndpoint("/swagger/Versao01/swagger.json", "AspNetCore 3.1.21");
+                x.RoutePrefix = string.Empty;
+            });
 
             app.UseHttpsRedirection();
 
