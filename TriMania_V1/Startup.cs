@@ -26,6 +26,7 @@ namespace TriMania_V1
             });
 
             services.AddDbContext(connectionString);
+            services.ConfigureAutorMapper();
             services.ConfigureMedaitRSetup();
         }
 

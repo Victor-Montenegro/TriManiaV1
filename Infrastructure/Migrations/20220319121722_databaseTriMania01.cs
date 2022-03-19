@@ -13,12 +13,11 @@ namespace Infrastructure.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CreateDate = table.Column<DateTime>(nullable: false),
-                    DeletionDate = table.Column<DateTime>(nullable: false),
+                    CreationDate = table.Column<DateTime>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Login = table.Column<string>(nullable: true),
                     Passworld = table.Column<string>(nullable: true),
-                    Cpf = table.Column<string>(nullable: true),
+                    CPF = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     BirthDay = table.Column<DateTime>(nullable: false)
                 },
@@ -34,13 +33,12 @@ namespace Infrastructure.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CreateDate = table.Column<DateTime>(nullable: false),
-                    DeletionDate = table.Column<DateTime>(nullable: false),
                     Street = table.Column<string>(nullable: true),
                     Neighborhood = table.Column<string>(nullable: true),
                     Number = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: true),
                     State = table.Column<string>(nullable: true),
-                    UserId = table.Column<int>(nullable: true)
+                    UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -50,7 +48,7 @@ namespace Infrastructure.Migrations
                         column: x => x.UserId,
                         principalTable: "User",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

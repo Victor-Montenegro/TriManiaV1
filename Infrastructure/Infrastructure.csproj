@@ -9,6 +9,18 @@
     <Compile Remove="Migrations\20220310232513_DataBaseContext01.Designer.cs" />
     <Compile Remove="Migrations\20220312103817_databaseTriMania01.cs" />
     <Compile Remove="Migrations\20220312103817_databaseTriMania01.Designer.cs" />
+    <Compile Remove="Migrations\20220312103946_databaseTriMania01.cs" />
+    <Compile Remove="Migrations\20220312103946_databaseTriMania01.Designer.cs" />
+    <Compile Remove="Migrations\20220316220811_databaseTriMania2.cs" />
+    <Compile Remove="Migrations\20220316220811_databaseTriMania2.Designer.cs" />
+    <Compile Remove="Migrations\20220317232859_databaseTriMania01.cs" />
+    <Compile Remove="Migrations\20220317232859_databaseTriMania01.Designer.cs" />
+    <Compile Remove="Migrations\20220318215213_databaseTriMania01.cs" />
+    <Compile Remove="Migrations\20220318215213_databaseTriMania01.Designer.cs" />
+    <Compile Remove="Migrations\20220319121255_databaseTriMania02.cs" />
+    <Compile Remove="Migrations\20220319121255_databaseTriMania02.Designer.cs" />
+    <Compile Remove="Migrations\20220319121447_databaseTriMania01.cs" />
+    <Compile Remove="Migrations\20220319121447_databaseTriMania01.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

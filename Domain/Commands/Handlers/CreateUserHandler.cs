@@ -1,12 +1,13 @@
-﻿using Domain.Commands.Requests;
+﻿using AutoMapper;
+using Domain.Commands.Requests;
 using Domain.Commands.Responses;
 using Domain.Entities;
+using Domain.Interfaces;
+using Domain.Security;
 using MediatR;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Domain.Mappers;
-using Domain.Interfaces;
-using System;
 
 namespace Domain.Commands.Handlers
 {
@@ -14,52 +15,80 @@ namespace Domain.Commands.Handlers
     {
         private readonly IUserRepository _userRepository;
 
-        public CreateUserHandler(IUserRepository userRepository)
+        private IAddressRepository _addressRepository;
+
+        private readonly IMapper _mapper;
+
+        public CreateUserHandler(IUserRepository userRepository,IAddressRepository addressRepository, IMapper mapper)
         {
             _userRepository = userRepository;
+            _addressRepository = addressRepository;
+            _mapper = mapper;
         }
 
         public async Task<CreateUserResponse> Handle(CreateUserRequest request, CancellationToken cancellationToken)
         {
             try
             {
-                User user = Mapper.CreateUserRequestToUser(request);
+                User user = _mapper.Map<User>(request);
+                Address address = _mapper.Map<Address>(request);
 
-                var isExistEmail = await _userRepository.GetUserByEmail(user.Email);
-
-                if (isExistEmail != null)
-                    throw new Exception("Email informando já foi cadastrado");
+                user.Passworld = Cryptography.GenerateEncryptionSHA512(user.Passworld);
 
                 var isExistCpfOrCnpj = await _userRepository.GetUserByCpfOrCnpj(user.Cpf);
 
-                if (isExistCpfOrCnpj != null)
+                if (!(isExistCpfOrCnpj is null))
                     throw new Exception("CPF/CNPJ informando já foi cadastrado");
 
                 await _userRepository.Create(user);
 
-                var response = new CreateUserResponse() {Success = true, Result = new { Success = true, User = user } };
+                address.User = user;
 
-                return response;
+                await _addressRepository.Create(address);
+
+                return SuccessResponse(user,address);
             }
             catch (Exception ex)
             {
-                var response = new CreateUserResponse() { Success = false, Result = new { Validation = ex.Message} };
-
-                return response;
+                return NotSuccesResponse(ex.Message);
             }
         }
 
-        public async void Validations(User user)
+        private CreateUserResponse SuccessResponse(User user,Address address)
         {
-            var isExistEmail = await _userRepository.GetUserByEmail(user.Email);
+            return new CreateUserResponse()
+            {
+                Success = true,
+                Result = new {
+                   user.Id,
+                   user.Login,
+                   user.Name,
+                   user.Email,
+                   user.Cpf,
+                   user.BirthDay,
+                   address = new
+                   {
+                       address.Neighborhood,
+                       address.Street,
+                       address.Number,
+                       address.City,
+                       address.State,
+                   },
+                   user.CreateDate,
+                }
+            };
+        }
 
-            if (isExistEmail == null)
-                throw new Exception("Email informando já foi cadastrado");
-
-            var isExistCpfOrCnpj = await _userRepository.GetUserByCpfOrCnpj(user.Cpf);
-
-            if (isExistCpfOrCnpj == null)
-                throw new Exception("CPF/CNPJ informando já foi cadastrado");
+        private CreateUserResponse NotSuccesResponse(string message)
+        {
+            return new CreateUserResponse()
+            {
+                Success = false,
+                Result = new
+                {
+                    Validation = message
+                }
+            };
         }
     }
 }

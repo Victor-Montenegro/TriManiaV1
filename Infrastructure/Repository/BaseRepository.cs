@@ -25,6 +25,8 @@ namespace Infrastructure.Repository
         {
             try
             {
+                data.CreateDate = DateTime.Now;
+
                 _context.Add(data);
 
                 await _context.SaveChangesAsync();
@@ -97,6 +99,8 @@ namespace Infrastructure.Repository
 
                 if (result == null)
                     throw new Exception("Item nao encontrado");
+
+                data.CreateDate = DateTime.Now;
 
                 _context.Entry(result).CurrentValues.SetValues(data);
 

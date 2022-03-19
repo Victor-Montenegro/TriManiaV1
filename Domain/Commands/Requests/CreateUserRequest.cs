@@ -34,7 +34,7 @@ namespace Domain.Commands.Requests
         public string Email { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(UserMsg), ErrorMessageResourceName = "MSG0004")]
-        [DateTimeValidation(DataType.Date)]
+        [DateTimeValidation(DataType.Date, ErrorMessageResourceType = typeof(UserMsg), ErrorMessageResourceName = "MSG0004")]
         public string BirthDay { get; set; }
 
         public AddressRequest Address { get; set; }

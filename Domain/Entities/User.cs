@@ -16,5 +16,6 @@ namespace Domain.Entities
         public string Email { get; set; }
 
         public DateTime BirthDay { get; set; }
+
     }
 }

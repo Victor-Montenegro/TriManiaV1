@@ -13,7 +13,7 @@ namespace Domain.Validations
         {
             DateTime outDate;
 
-            if (value != null && DateTime.TryParse(value.ToString(), out outDate))
+            if (value != null && DateTime.TryParse(value.ToString(), out outDate) && DateTime.Parse(value.ToString()).Year >= 1900)
                 return true;
             else
                 return false;

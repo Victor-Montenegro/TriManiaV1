@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(TriManiaContext))]
-    [Migration("20220316220811_databaseTriMania2")]
-    partial class databaseTriMania2
+    [Migration("20220319121722_databaseTriMania01")]
+    partial class databaseTriMania01
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,22 +34,23 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DeletionDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Neighborhood")
+                        .HasColumnName("Neighborhood")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Number")
+                        .HasColumnName("Number")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("State")
+                        .HasColumnName("State")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Street")
+                        .HasColumnName("Street")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -67,21 +68,23 @@ namespace Infrastructure.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("BirthDay")
+                        .HasColumnName("BirthDay")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Cpf")
+                        .HasColumnName("CPF")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletionDate")
+                        .HasColumnName("CreationDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
+                        .HasColumnName("Email")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Login")
+                        .HasColumnName("Login")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -99,7 +102,9 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Domain.Entities.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

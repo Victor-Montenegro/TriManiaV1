@@ -10,5 +10,10 @@ namespace Infrastructure.Data
         public DbSet<Address> Address { get; set; }
 
         public TriManiaContext(DbContextOptions options) : base(options) { }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(TriManiaContext).Assembly);
+        }
     }
 }

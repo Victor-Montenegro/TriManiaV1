@@ -24,7 +24,7 @@ namespace Infrastructure.Repository
             {
                 //int count = await _dataSet.CountAsync();
 
-                var result = await _dataSet.Where(x => x.DeletionDate == null).Skip(page * 10).Take(10).AsNoTracking().ToListAsync();
+                var result = await _dataSet.Skip(page * 10).Take(10).AsNoTracking().ToListAsync();
 
                 return result;
             }
@@ -38,7 +38,7 @@ namespace Infrastructure.Repository
         {
             try
             {
-                return await _dataSet.Where(x => x.Cpf == taxNumber && x.DeletionDate == null).AsNoTracking().FirstOrDefaultAsync();
+                return await _dataSet.Where(x => x.Cpf == taxNumber).AsNoTracking().FirstOrDefaultAsync();
             }
             catch (Exception ex)
             {
@@ -50,7 +50,7 @@ namespace Infrastructure.Repository
         {
             try
             {
-                return await _dataSet.Where(x => x.Email == email && x.DeletionDate == null).AsNoTracking().FirstOrDefaultAsync();
+                return await _dataSet.Where(x => x.Email == email ).AsNoTracking().FirstOrDefaultAsync();
             }
             catch (Exception ex)
             {
