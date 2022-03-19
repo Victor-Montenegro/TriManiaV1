@@ -12,5 +12,8 @@ namespace Domain.Interfaces
 
         public Task<User> GetUserByCpfOrCnpj(string taxNumber);
 
+        public Task<User> GetUserByLogin(string login);
+
+        public Task<User> GetUserByLoginAndPassworld(string login, string passworld);
     }
 }

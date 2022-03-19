@@ -26,6 +26,13 @@ namespace Infrastructure.Mappers
             builder.Property(x => x.CreateDate)
                 .HasColumnName("CreationDate");
 
+            builder.Property(x => x.DeletionDate)
+                .HasColumnName("DeletionDate");
+
+            builder.Property(x => x.Type)
+                .HasColumnType("TINYINT")
+                .HasColumnName("Type");
+
         }
     }
 }

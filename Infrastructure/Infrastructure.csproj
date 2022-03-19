@@ -21,6 +21,14 @@
     <Compile Remove="Migrations\20220319121255_databaseTriMania02.Designer.cs" />
     <Compile Remove="Migrations\20220319121447_databaseTriMania01.cs" />
     <Compile Remove="Migrations\20220319121447_databaseTriMania01.Designer.cs" />
+    <Compile Remove="Migrations\20220319121722_databaseTriMania01.cs" />
+    <Compile Remove="Migrations\20220319121722_databaseTriMania01.Designer.cs" />
+    <Compile Remove="Migrations\20220319155507_databaseTriMania01.cs" />
+    <Compile Remove="Migrations\20220319155507_databaseTriMania01.Designer.cs" />
+    <Compile Remove="Migrations\20220319155929_databaseTriMania01.cs" />
+    <Compile Remove="Migrations\20220319155929_databaseTriMania01.Designer.cs" />
+    <Compile Remove="Migrations\20220319160006_databaseTriMania01.cs" />
+    <Compile Remove="Migrations\20220319160006_databaseTriMania01.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,6 +47,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

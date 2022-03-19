@@ -117,16 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="MSG0001" xml:space="preserve">
+  <data name="DataAnnotationError_00001" xml:space="preserve">
     <value>O campo {0} é obrigatório</value>
   </data>
-  <data name="MSG0002" xml:space="preserve">
+  <data name="DataAnnotationError_00002" xml:space="preserve">
     <value>O campo {0} deve ter no mínimo {1} caracteres</value>
   </data>
-  <data name="MSG0003" xml:space="preserve">
+  <data name="DataAnnotationError_00003" xml:space="preserve">
     <value>O campo {0} deve ter no maximo {1} caracteres</value>
   </data>
-  <data name="MSG0004" xml:space="preserve">
+  <data name="DataAnnotationError_00004" xml:space="preserve">
     <value>Informe um {0} valido</value>
   </data>
 </root>

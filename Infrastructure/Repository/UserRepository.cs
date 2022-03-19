@@ -57,5 +57,29 @@ namespace Infrastructure.Repository
                 throw ex;
             }
         }
+
+        public Task<User> GetUserByLogin(string login)
+        {
+            try
+            {
+                return _dataSet.Where(x => x.Login == login).AsNoTracking().FirstOrDefaultAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public Task<User> GetUserByLoginAndPassworld(string login, string passworld)
+        {
+            try
+            {
+                return _dataSet.Where(x => x.Login == login && x.Passworld == passworld).AsNoTracking().FirstOrDefaultAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

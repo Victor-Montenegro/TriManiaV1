@@ -22,24 +22,24 @@ namespace Domain.Language.TriManiaV1 {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class UserMsg {
+    internal class LoginUserMsg {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal UserMsg() {
+        internal LoginUserMsg() {
         }
         
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Domain.Language.TriManiaV1.UserMsg", typeof(UserMsg).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Domain.Language.TriManiaV1.LoginUserMsg", typeof(LoginUserMsg).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,48 +51,12 @@ namespace Domain.Language.TriManiaV1 {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to O campo {0} é obrigatório.
-        /// </summary>
-        public static string MSG0001 {
-            get {
-                return ResourceManager.GetString("MSG0001", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to O campo {0} deve ter no mínimo {1} caracteres.
-        /// </summary>
-        public static string MSG0002 {
-            get {
-                return ResourceManager.GetString("MSG0002", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to O campo {0} deve ter no maximo {1} caracteres.
-        /// </summary>
-        public static string MSG0003 {
-            get {
-                return ResourceManager.GetString("MSG0003", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Informe um {0} valido.
-        /// </summary>
-        public static string MSG0004 {
-            get {
-                return ResourceManager.GetString("MSG0004", resourceCulture);
             }
         }
     }

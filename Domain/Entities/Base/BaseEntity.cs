@@ -7,5 +7,7 @@ namespace Domain.Entities.Base
         public int Id { get; set; }
 
         public DateTime CreateDate { get; set; }
+
+        public DateTime? DeletionDate { get; set; }
     }
 }

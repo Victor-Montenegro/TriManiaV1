@@ -2,10 +2,12 @@
 using Domain.Commands.Requests;
 using Domain.Commands.Responses;
 using Domain.Entities;
+using Domain.Enums;
 using Domain.Interfaces;
-using Domain.Security;
+using DomainService.Services.Security;
 using MediatR;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -33,12 +35,23 @@ namespace Domain.Commands.Handlers
                 User user = _mapper.Map<User>(request);
                 Address address = _mapper.Map<Address>(request);
 
-                user.Passworld = Cryptography.GenerateEncryptionSHA512(user.Passworld);
+                user.Type = UserType.Client;
+                user.Passworld = CryptographyService.GenerateEncryptionSHA512(user.Passworld);
+
+                List<string> validations = new List<string>();
+
+                var isExistLogin = await _userRepository.GetUserByLogin(user.Login);
+
+                if (!(isExistLogin is null))
+                    validations.Add("Esse login já existe");
 
                 var isExistCpfOrCnpj = await _userRepository.GetUserByCpfOrCnpj(user.Cpf);
 
                 if (!(isExistCpfOrCnpj is null))
-                    throw new Exception("CPF/CNPJ informando já foi cadastrado");
+                    validations.Add("CPF/CNPJ informando já foi cadastrado");
+
+                if (!validations.Count.Equals(0))
+                    return BadRequestResponse(validations);
 
                 await _userRepository.Create(user);
 
@@ -52,6 +65,17 @@ namespace Domain.Commands.Handlers
             {
                 return NotSuccesResponse(ex.Message);
             }
+        }
+
+        private CreateUserResponse BadRequestResponse(List<string> validations)
+        {
+            return new CreateUserResponse(){
+                Success = false,
+                Result = new
+                {
+                    Validations = validations
+                }
+            };
         }
 
         private CreateUserResponse SuccessResponse(User user,Address address)

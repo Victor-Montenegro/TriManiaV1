@@ -1,4 +1,5 @@
 ﻿using Domain.Entities.Base;
+using Domain.Enums;
 using System;
 
 namespace Domain.Entities
@@ -16,6 +17,8 @@ namespace Domain.Entities
         public string Email { get; set; }
 
         public DateTime BirthDay { get; set; }
+
+        public UserType Type { get; set; }
 
     }
 }

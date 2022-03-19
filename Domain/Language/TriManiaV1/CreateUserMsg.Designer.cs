@@ -22,14 +22,14 @@ namespace Domain.Language.TriManiaV1 {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class AddressMsg {
+    internal class CreateUserMsg {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal AddressMsg() {
+        internal CreateUserMsg() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Domain.Language.TriManiaV1 {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Domain.Language.TriManiaV1.AddressMsg", typeof(AddressMsg).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Domain.Language.TriManiaV1.CreateUserMsg", typeof(CreateUserMsg).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,42 +57,6 @@ namespace Domain.Language.TriManiaV1 {
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to O campo {0} é obrigatório.
-        /// </summary>
-        internal static string MSG0001 {
-            get {
-                return ResourceManager.GetString("MSG0001", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to O campo {0} deve ter no mínimo {1} caracteres.
-        /// </summary>
-        internal static string MSG0002 {
-            get {
-                return ResourceManager.GetString("MSG0002", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to O campo {0} deve ter no maximo {1} caracteres.
-        /// </summary>
-        internal static string MSG0003 {
-            get {
-                return ResourceManager.GetString("MSG0003", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Informe um {0} valido.
-        /// </summary>
-        internal static string MSG0004 {
-            get {
-                return ResourceManager.GetString("MSG0004", resourceCulture);
             }
         }
     }

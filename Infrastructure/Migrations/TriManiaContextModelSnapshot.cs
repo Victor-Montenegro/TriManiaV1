@@ -32,6 +32,9 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("DeletionDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Neighborhood")
                         .HasColumnName("Neighborhood")
                         .HasColumnType("nvarchar(max)");
@@ -77,6 +80,10 @@ namespace Infrastructure.Migrations
                         .HasColumnName("CreationDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("DeletionDate")
+                        .HasColumnName("DeletionDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Email")
                         .HasColumnName("Email")
                         .HasColumnType("nvarchar(max)");
@@ -91,9 +98,27 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Passworld")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<byte>("Type")
+                        .HasColumnName("Type")
+                        .HasColumnType("TINYINT");
+
                     b.HasKey("Id");
 
                     b.ToTable("User");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BirthDay = new DateTime(2022, 3, 19, 17, 46, 31, 398, DateTimeKind.Local).AddTicks(8956),
+                            Cpf = "00000000000",
+                            CreateDate = new DateTime(2022, 3, 19, 17, 46, 31, 399, DateTimeKind.Local).AddTicks(4565),
+                            Email = "admin@admin.com.br",
+                            Login = "admin",
+                            Name = "Admin",
+                            Passworld = "BA3253876AED6BC22D4A6FF53D8406C6AD864195ED144AB5C87621B6C233B548BAEAE6956DF346EC8C17F5EA10F35EE3CBC514797ED7DDD3145464E2A0BAB413",
+                            Type = (byte)1
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Address", b =>
