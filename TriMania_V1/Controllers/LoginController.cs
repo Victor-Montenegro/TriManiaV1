@@ -12,6 +12,23 @@ namespace TriMania_V1.Controllers
     [Route("login")]
     public class LoginController : ControllerBase
     {
+        #region swagger
+        /// <summary>
+        /// Realiza o login de usuario no sistema
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// request:
+        ///
+        ///     POST /Login
+        ///     {
+        ///        "Login" : "48957309055",
+        ///        "Passworld" : "ASD@!sad2"
+        ///     }
+        /// </remarks>
+        /// <response code="200">Retorna o o user logado e seu token</response>
+        /// <response code="404">Retorna quando a dados invalidos</response>
+        #endregion
         [HttpPost]
         [Route("login")]
         [ErrorsValidation]

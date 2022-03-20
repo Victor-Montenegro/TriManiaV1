@@ -14,6 +14,37 @@ namespace TriMania_V1.Controllers
     [Route("users")]
     public class UserController : ControllerBase
     {
+        #region swagger
+        /// <summary>
+        /// Realizar a criação de um usuario
+        /// </summary>
+        /// <returns>
+        /// </returns>
+        /// <remarks>
+        /// 
+        /// request:
+        ///
+        ///     POST /User
+        ///     {
+        ///        "Name" : "João Victor Montenegro Rocha",
+        ///        "Login" : "48957309055",
+        ///        "Passworld" : "ASD@!sad2",
+        ///        "Cpf": "48957309055",
+        ///        "Email" : "joaos@gmail.com.br",
+        ///        "BirthDay":"10/11/2010",
+        ///        "Address" : {
+        ///             "Street":"Teodoro de Castro",
+        ///             "Neighborhood":"Granja Portugal",
+        ///             "Number":"13621",
+        ///             "City":"Fortaleza",
+        ///             "State":"Ceara"
+        ///         }
+        ///     }
+        ///     
+        /// </remarks>
+        /// <response code="200">Retorna o usuario criado</response>
+        /// <response code="404">Retorna quando a dados invalidos</response>
+        #endregion
         [HttpPost]
         [Route("createUser")]
         [ErrorsValidation]
@@ -35,6 +66,18 @@ namespace TriMania_V1.Controllers
             }
         }
 
+        #region swagger
+        /// <summary>
+        /// Lista de usuarios criados.
+        /// </summary>
+        /// <param name="page"></param>
+        /// <returns>Lista de 0 a 10 usuarios por pagina</returns>
+        /// <remarks>
+        /// </remarks>
+        /// <response code="200">Retorna uma lista paginada de até 10 usuarios</response>
+        /// <response code="401">Retorna quando foi realizado a autenticação</response>
+        /// <response code="403">Retorna quando a autorização e negada</response>
+        #endregion
         [HttpGet]
         [Route("getusers/{page:int}")]
         [Authorize(Roles ="Manager")]

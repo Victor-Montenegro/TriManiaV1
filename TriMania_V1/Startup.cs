@@ -1,15 +1,17 @@
+using CrossCutting.DependencyInjection;
+using DomainService.Services.Security;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using CrossCutting.DependencyInjection;
-using DomainService.Services.Security;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 
 namespace TriMania_V1
 {
@@ -86,6 +88,9 @@ namespace TriMania_V1
                             new List<string>()
                         }
                     });
+
+                    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                    x.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
                 }
             );
         }
