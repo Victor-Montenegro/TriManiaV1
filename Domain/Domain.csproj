@@ -20,6 +20,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ApiMsg.resx</DependentUpon>
     </Compile>
+    <Compile Update="Language\TriManiaV1\CreateOrderMsg.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CreateOrderMsg.resx</DependentUpon>
+    </Compile>
     <Compile Update="Language\TriManiaV1\CreateUserMsg.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -36,6 +41,10 @@
     <EmbeddedResource Update="Language\API\ApiMsg.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ApiMsg.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Language\TriManiaV1\CreateOrderMsg.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CreateOrderMsg.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Language\TriManiaV1\CreateUserMsg.resx">
       <Generator>ResXFileCodeGenerator</Generator>

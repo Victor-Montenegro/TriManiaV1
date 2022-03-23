@@ -4,14 +4,16 @@ using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(TriManiaContext))]
-    partial class TriManiaContextModelSnapshot : ModelSnapshot
+    [Migration("20220321223947_databaseTriMania02")]
+    partial class databaseTriMania02
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,89 +61,6 @@ namespace Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Address");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Order", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime?>("CancelDate")
-                        .HasColumnName("CancelDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnName("CreationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletionDate")
-                        .HasColumnName("DeletionDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("FinishedDate")
-                        .HasColumnName("FinishedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Status")
-                        .HasColumnName("Status")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("TotalValue")
-                        .HasColumnName("TotalValue")
-                        .HasColumnType("DECIMAL(15,2)");
-
-                    b.Property<int>("Type")
-                        .HasColumnName("Type")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Order");
-                });
-
-            modelBuilder.Entity("Domain.Entities.OrderItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnName("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletionDate")
-                        .HasColumnName("DeletionDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnName("Price")
-                        .HasColumnType("DECIMAL(15,2)");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnName("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("OrderItem");
                 });
 
             modelBuilder.Entity("Domain.Entities.Product", b =>
@@ -229,9 +148,9 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            BirthDay = new DateTime(2022, 3, 22, 21, 13, 34, 736, DateTimeKind.Local).AddTicks(6246),
+                            BirthDay = new DateTime(2022, 3, 21, 19, 39, 47, 523, DateTimeKind.Local).AddTicks(6335),
                             Cpf = "00000000000",
-                            CreateDate = new DateTime(2022, 3, 22, 21, 13, 34, 737, DateTimeKind.Local).AddTicks(2006),
+                            CreateDate = new DateTime(2022, 3, 21, 19, 39, 47, 524, DateTimeKind.Local).AddTicks(1841),
                             Email = "admin@admin.com.br",
                             Login = "admin",
                             Name = "Admin",
@@ -245,30 +164,6 @@ namespace Infrastructure.Migrations
                     b.HasOne("Domain.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Domain.Entities.Order", b =>
-                {
-                    b.HasOne("Domain.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Domain.Entities.OrderItem", b =>
-                {
-                    b.HasOne("Domain.Entities.Order", "Order")
-                        .WithMany()
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

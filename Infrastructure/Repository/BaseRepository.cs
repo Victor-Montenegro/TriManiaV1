@@ -78,12 +78,7 @@ namespace Infrastructure.Repository
         {
             try
             {
-                var result = await _dataSet.Where(x => x.Id == id).AsNoTracking().SingleOrDefaultAsync();
-
-                if (result == null)
-                    throw new Exception("Item não encontrado");
-
-                return result;
+                return await _dataSet.Where(x => x.Id == id).AsNoTracking().SingleOrDefaultAsync();
             }
             catch (Exception ex)
             {

@@ -22,8 +22,8 @@ namespace TriMania_V1.Controllers
         ///
         ///     POST /Login
         ///     {
-        ///        "Login" : "48957309055",
-        ///        "Passworld" : "ASD@!sad2"
+        ///        "Login" : "admin",
+        ///        "Passworld" : "123456"
         ///     }
         /// </remarks>
         /// <response code="200">Retorna o o user logado e seu token</response>

@@ -15,6 +15,9 @@ namespace CrossCutting.DependencyInjection
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IAddressRepository, AddressRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IOrderItemRepository, OrderItemRepository>();
 
             services.AddScoped<TriManiaContext, TriManiaContext>();
 
