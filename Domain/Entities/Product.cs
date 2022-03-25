@@ -23,7 +23,7 @@ namespace Domain.Entities
         public void SellProduct(int qnt)
         {
             if(HasStock(qnt))
-                Quantity--;
+                Quantity -= qnt;
         }
 
         public void SetStock(int qnt)

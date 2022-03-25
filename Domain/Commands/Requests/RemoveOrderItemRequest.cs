@@ -1,5 +1,4 @@
 ﻿using Domain.Commands.Responses;
-using Domain.Enums;
 using Domain.Language.API;
 using Domain.Models;
 using MediatR;
@@ -8,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Commands.Requests
 {
-    public class CreateOrderRequest : IRequest<CreateOrderResponse>
+    public class RemoveOrderItemRequest : IRequest<RemoveOrderItemResponse>
     {
         #region validações
         [Required(ErrorMessageResourceType = typeof(ApiMsg), ErrorMessageResourceName = "DataAnnotationError_00001")]
@@ -16,6 +15,6 @@ namespace Domain.Commands.Requests
         #endregion
         public int UserId { get; set; }
 
-        public List<OrderItemRequest> Items { get; set; } = new List<OrderItemRequest>();
+        public List<ListRemoveOrderItemRequest> Items { get; set; }
     }
 }

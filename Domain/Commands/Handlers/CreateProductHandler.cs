@@ -28,15 +28,7 @@ namespace Domain.Commands.Handlers
             {
                 Product product = _mapper.Map<Product>(request);
 
-                var isNameProductExist = await _productRepository.GetProductByName(product.Name);
-
-                List<string> validations = new List<string>();
-
-                if (!(isNameProductExist is null))
-                    validations.Add("Esse Produto já foi cadastrado");
-
-                if (!validations.Count.Equals(0))
-                    return BadSucessResponse(validations);
+                await ValidationProduct(product);
 
                 await _productRepository.Create(product);
 
@@ -44,8 +36,18 @@ namespace Domain.Commands.Handlers
             }
             catch (Exception ex)
             {
-                return NotSuccessResponse("Não foi possível criar o produto.");
+                return NotSuccessResponse(ex.Message);
             }
+        }
+
+        public async Task<bool> ValidationProduct(Product product)
+        {
+            var isNameProductExist = await _productRepository.GetProductByName(product.Name);
+
+            if (!(isNameProductExist is null))
+                throw new Exception("Esse Produto já foi cadastrado");
+
+            return true;
         }
 
         public CreateProductResponse NotSuccessResponse(string message)

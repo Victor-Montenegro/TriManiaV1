@@ -24,6 +24,7 @@ namespace TriMania_V1.Controllers
         #endregion
         [HttpPost]
         [Route("createproduct")]
+        [Authorize(Roles = "Manager")]
         [ErrorsValidation]
         public async Task<IActionResult> CreateProduct([FromBody]CreateProductRequest command,
             [FromServices]IMediator handler)

@@ -19,7 +19,7 @@ namespace Infrastructure.Migrations
                     CancelDate = table.Column<DateTime>(nullable: true),
                     FinishedDate = table.Column<DateTime>(nullable: true),
                     Status = table.Column<int>(nullable: false),
-                    Type = table.Column<int>(nullable: false),
+                    Type = table.Column<int>(nullable: true),
                     UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

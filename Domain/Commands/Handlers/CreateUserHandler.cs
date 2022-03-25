@@ -35,23 +35,10 @@ namespace Domain.Commands.Handlers
                 User user = _mapper.Map<User>(request);
                 Address address = _mapper.Map<Address>(request);
 
-                user.Type = UserType.Client;
-                user.Passworld = CryptographyService.GenerateEncryptionSHA512(user.Passworld);
+                user.SetUserType(UserType.Client);
+                user.EncryptPassword();
 
-                List<string> validations = new List<string>();
-
-                var isExistLogin = await _userRepository.GetUserByLogin(user.Login);
-
-                if (!(isExistLogin is null))
-                    validations.Add("Esse login já existe");
-
-                var isExistCpfOrCnpj = await _userRepository.GetUserByCpfOrCnpj(user.Cpf);
-
-                if (!(isExistCpfOrCnpj is null))
-                    validations.Add("CPF/CNPJ informando já foi cadastrado");
-
-                if (!validations.Count.Equals(0))
-                    return BadRequestResponse(validations);
+                await ValidationUser(user);
 
                 await _userRepository.Create(user);
 
@@ -65,6 +52,21 @@ namespace Domain.Commands.Handlers
             {
                 return NotSuccesResponse(ex.Message);
             }
+        }
+
+        public async Task<bool> ValidationUser(User user)
+        {
+            var isExistLogin = await _userRepository.GetUserByLogin(user.Login);
+
+            if (!(isExistLogin is null))
+                throw new Exception("Esse login já existe");
+
+            var isExistCpfOrCnpj = await _userRepository.GetUserByCpfOrCnpj(user.Cpf);
+
+            if (!(isExistCpfOrCnpj is null))
+                throw new Exception("CPF/CNPJ informando já foi cadastrado");
+
+            return true;
         }
 
         private CreateUserResponse BadRequestResponse(List<string> validations)

@@ -22,7 +22,7 @@ namespace Domain.Language.TriManiaV1 {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class CreateOrderMsg {
+    public class CreateOrderMsg {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Domain.Language.TriManiaV1 {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Domain.Language.TriManiaV1.CreateOrderMsg", typeof(CreateOrderMsg).Assembly);
@@ -51,7 +51,7 @@ namespace Domain.Language.TriManiaV1 {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace Domain.Language.TriManiaV1 {
         /// <summary>
         ///   Looks up a localized string similar to Esse productId {0} não existe.
         /// </summary>
-        internal static string CreateOrderValidationError_0001 {
+        public static string CreateOrderValidationError_0001 {
             get {
                 return ResourceManager.GetString("CreateOrderValidationError_0001", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace Domain.Language.TriManiaV1 {
         /// <summary>
         ///   Looks up a localized string similar to Estoque insuficiente para esse productId {0}.
         /// </summary>
-        internal static string CreateOrderValidationError_0002 {
+        public static string CreateOrderValidationError_0002 {
             get {
                 return ResourceManager.GetString("CreateOrderValidationError_0002", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace Domain.Language.TriManiaV1 {
         /// <summary>
         ///   Looks up a localized string similar to 0 pedido {0} ainda está em andamento, por favor finalizar antes de criar um novo pedido.
         /// </summary>
-        internal static string CreateOrderValidationError_0003 {
+        public static string CreateOrderValidationError_0003 {
             get {
                 return ResourceManager.GetString("CreateOrderValidationError_0003", resourceCulture);
             }
@@ -90,9 +90,18 @@ namespace Domain.Language.TriManiaV1 {
         /// <summary>
         ///   Looks up a localized string similar to O usuário informado não existe.
         /// </summary>
-        internal static string CreateOrderValidationError_0004 {
+        public static string CreateOrderValidationError_0004 {
             get {
                 return ResourceManager.GetString("CreateOrderValidationError_0004", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O item com o productId {0} está sendo repetido.
+        /// </summary>
+        public static string CreateOrderValidationError_0005 {
+            get {
+                return ResourceManager.GetString("CreateOrderValidationError_0005", resourceCulture);
             }
         }
     }

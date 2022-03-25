@@ -11,17 +11,16 @@ namespace Domain.Entities
         public DateTime? CancelDate { get; private set; }
         public DateTime? FinishedDate { get; private set; }
         public OrderStatus Status { get; private set; }
-        public PaymentType Type { get; private set; }
+        public PaymentType? Type { get; private set; }
         public User User { get; private set; }
         public int UserId { get; private set; }
 
-        public Order(PaymentType type, int userId)
+        public Order(int userId)
         {
-            Type = type;
             UserId = userId;
         }
 
-        public void CancelOrder()
+        public void CancelledOrder()
         {
             CancelDate = DateTime.Now;
             Status = OrderStatus.Cancelled;
@@ -29,22 +28,15 @@ namespace Domain.Entities
 
         public void CalculateTotalOrder(List<OrderItem> items)
         {
+            TotalValue = 0;
             foreach (var item in items)
                 TotalValue += item.Price * item.Quantity;
         }
 
         public bool IsOrderCompleted()
         {
-            if (Status.Equals(OrderStatus.Completed) && 
-                !TotalValue.Equals(0))
-                return true;
-
-            return false;
-        }
-
-        public bool IsOrderCancelled()
-        {
-            if (Status.Equals(OrderStatus.Cancelled))
+            if (!TotalValue.Equals(0) &&
+                Type != null)
                 return true;
 
             return false;
@@ -53,6 +45,17 @@ namespace Domain.Entities
         public void SetStatusOrder(OrderStatus status)
         {
             Status = status;
+        }
+
+        public void SetPaymentType(PaymentType type)
+        {
+            Type = type;
+        }
+
+        public void CompletedOrder()
+        {
+            Status = OrderStatus.Completed;
+            FinishedDate = DateTime.Now;
         }
     }
 }

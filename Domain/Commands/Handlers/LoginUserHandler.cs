@@ -28,25 +28,27 @@ namespace Domain.Commands.Handlers
             {
                 request.Passworld = CryptographyService.GenerateEncryptionSHA512(request.Passworld);
 
-                User isUserExist = await _userRepository.GetUserByLoginAndPassworld(request.Login, request.Passworld);
+                User user = await ValidationLogin(request);
 
-                List<string> validations = new List<string>();
+                string token = TokenService.GenerateToken(user.Id.ToString(), user.Type.ToString(), _signingConfigurationService);
 
-                if (isUserExist is null)
-                    validations.Add("Login ou senha incorretos");
-
-                if (!validations.Count.Equals(0))
-                    return BadSucessResponse(validations);
-
-                string token = TokenService.GenerateToken(isUserExist.Id.ToString(),isUserExist.Type.ToString(), _signingConfigurationService);
-
-                return SuccessResponse(isUserExist,token);
+                return SuccessResponse(user, token);
 
             }
             catch (Exception ex)
             {
-                return NotSucessResponse("Não foi possivel realizar o login, tente novamente mais tarde");
+                return NotSucessResponse(ex.Message);
             }
+        }
+
+        public async Task<User> ValidationLogin(LoginUserRequest request)
+        {
+            User isUserExist = await _userRepository.GetUserByLoginAndPassworld(request.Login, request.Passworld);
+
+            if (isUserExist is null)
+                throw new Exception("Login ou senha incorretos");
+
+            return isUserExist;
         }
 
         private LoginUserResponse BadSucessResponse(List<string> validations)

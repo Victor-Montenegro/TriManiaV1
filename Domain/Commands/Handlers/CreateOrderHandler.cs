@@ -5,9 +5,11 @@ using Domain.Entities;
 using Domain.Enums;
 using Domain.Interfaces;
 using Domain.Language.TriManiaV1;
+using Domain.Models;
 using MediatR;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -21,7 +23,7 @@ namespace Domain.Commands.Handlers
         private IProductRepository _productRepository;
         private IMapper _mapper;
 
-        public CreateOrderHandler(IUserRepository userRepository,IOrderRepository orderRepository, IOrderItemRepository orderItemRepository, IProductRepository productRepository, IMapper mapper)
+        public CreateOrderHandler(IUserRepository userRepository, IOrderRepository orderRepository, IOrderItemRepository orderItemRepository, IProductRepository productRepository, IMapper mapper)
         {
             _userRepository = userRepository;
             _orderRepository = orderRepository;
@@ -34,33 +36,19 @@ namespace Domain.Commands.Handlers
         {
             try
             {
+                await ValidationUserAndOrder(request.UserId);
+                ValidationItem(request.Items);
+
                 List<string> validations = new List<string>();
-                
-                var isUserExist = await _userRepository.GetById(request.UserId);
-
-                if (isUserExist is null)
-                    throw new Exception(CreateOrderMsg.CreateOrderValidationError_0004);
-
-                var isOrderProgress = await _orderRepository.GetOpenOrderByUserId(request.UserId);
-
-                if (!(isOrderProgress is null))
-                    throw new Exception(String.Format(CreateOrderMsg.CreateOrderValidationError_0003, isOrderProgress.Id));
-
                 List<OrderItem> items = new List<OrderItem>();
 
                 foreach (var item in request.Items)
                 {
-                    var isProductExist = await _productRepository.GetById(item.ProductId);
+                    string validationProduct = await ValidationProduct(item);
 
-                    if(isProductExist is null)
+                    if (!validationProduct.Length.Equals(0))
                     {
-                        validations.Add(string.Format(CreateOrderMsg.CreateOrderValidationError_0001, item.ProductId));
-                        continue;
-                    }
-
-                    if (!isProductExist.HasStock(item.Quantity))
-                    {
-                        validations.Add(string.Format(CreateOrderMsg.CreateOrderValidationError_0002, item.ProductId));
+                        validations.Add(validationProduct);
                         continue;
                     }
 
@@ -77,19 +65,56 @@ namespace Domain.Commands.Handlers
 
                 await _orderRepository.Create(order);
 
-                foreach(var item in items)
+                foreach (var item in items)
                 {
                     item.SetOrderId(order.Id);
 
                     await _orderItemRepository.Create(item);
                 }
 
-                return SuccessResponse(order,items);
+                return SuccessResponse(order, items);
             }
             catch (Exception ex)
             {
                 return NotSucessResponse(ex.Message);
             }
+        }
+
+        public void ValidationItem(List<OrderItemRequest> items)
+        {
+            foreach(var item in items)
+            {
+                if (!items.Count(x => x.ProductId == item.ProductId).Equals(1))
+                    throw new Exception(string.Format(CreateOrderMsg.CreateOrderValidationError_0005,item.ProductId));
+            }              
+        }
+
+        public async Task<bool> ValidationUserAndOrder(int userId)
+        {
+            var isUserExist = await _userRepository.GetById(userId);
+
+            if (isUserExist is null)
+                throw new Exception(CreateOrderMsg.CreateOrderValidationError_0004);
+
+            var isOrderProgress = await _orderRepository.GetOpenOrderByUserId(userId);
+
+            if (!(isOrderProgress is null))
+                throw new Exception(string.Format(CreateOrderMsg.CreateOrderValidationError_0003, isOrderProgress.Id));
+
+            return true;
+        }
+
+        public async Task<string> ValidationProduct(OrderItemRequest item)
+        {
+            var isProductExist = await _productRepository.GetById(item.ProductId);
+
+            if (isProductExist is null)
+                return string.Format(CreateOrderMsg.CreateOrderValidationError_0001, item.ProductId);
+
+            if (!isProductExist.HasStock(item.Quantity))
+                return string.Format(CreateOrderMsg.CreateOrderValidationError_0002, item.ProductId);
+
+            return string.Empty;
         }
 
         public CreateOrderResponse SuccessResponse(Order order, List<OrderItem> orderItems)
@@ -102,12 +127,15 @@ namespace Domain.Commands.Handlers
             return new CreateOrderResponse()
             {
                 Success = true,
-                Result = new { 
-                    Order = new {
+                Result = new
+                {
+                    Order = new
+                    {
                         order.Id,
                         order.UserId,
                         order.Status,
                         order.Type,
+                        order.TotalValue,
                         items,
                         order.CreateDate
                     }

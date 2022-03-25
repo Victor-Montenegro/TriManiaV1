@@ -129,4 +129,7 @@
   <data name="CreateOrderValidationError_0004" xml:space="preserve">
     <value>O usuário informado não existe</value>
   </data>
+  <data name="CreateOrderValidationError_0005" xml:space="preserve">
+    <value>O item com o productId {0} está sendo repetido</value>
+  </data>
 </root>

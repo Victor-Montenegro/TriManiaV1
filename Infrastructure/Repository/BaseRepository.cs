@@ -45,10 +45,11 @@ namespace Infrastructure.Repository
             {
                 var result = await _dataSet.Where(x => x.Id == id).AsNoTracking().SingleOrDefaultAsync();
 
-                if (result == null)
-                    throw new Exception("Item não encontrado");
+                result.DeletionDate = DateTime.Now;
 
-                _dataSet.Remove(result);
+                //_dataSet.Remove(result);
+
+                _context.Entry(result).State = EntityState.Modified;
 
                 await _context.SaveChangesAsync();
 
@@ -64,7 +65,7 @@ namespace Infrastructure.Repository
         {
             try
             {
-                var result = await _dataSet.AsNoTracking().ToListAsync();
+                var result = await _dataSet.Where(x => x.DeletionDate == null).AsNoTracking().ToListAsync();
 
                 return result;
             }
@@ -78,7 +79,7 @@ namespace Infrastructure.Repository
         {
             try
             {
-                return await _dataSet.Where(x => x.Id == id).AsNoTracking().SingleOrDefaultAsync();
+                return await _dataSet.Where(x => x.Id == id && x.DeletionDate == null).AsNoTracking().SingleOrDefaultAsync();
             }
             catch (Exception ex)
             {
@@ -90,18 +91,15 @@ namespace Infrastructure.Repository
         {
             try
             {
-                var result = await _dataSet.Where(x => x.Id == data.Id).AsNoTracking().SingleOrDefaultAsync();
-
-                if (result == null)
-                    throw new Exception("Item nao encontrado");
+                //var result = await _dataSet.Where(x => x.Id == data.Id).AsNoTracking().SingleOrDefaultAsync();
 
                 data.CreateDate = DateTime.Now;
 
-                _context.Entry(result).CurrentValues.SetValues(data);
+                _context.Entry(data).State = EntityState.Modified;
 
                 await _context.SaveChangesAsync();
 
-                return result;
+                return data;
             }
             catch (Exception ex)
             {

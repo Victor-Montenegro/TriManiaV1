@@ -43,7 +43,7 @@
       <LastGenOutput>ApiMsg.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Language\TriManiaV1\CreateOrderMsg.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CreateOrderMsg.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Language\TriManiaV1\CreateUserMsg.resx">
