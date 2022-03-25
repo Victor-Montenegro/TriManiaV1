@@ -29,10 +29,16 @@
     <Compile Remove="Migrations\20220319155929_databaseTriMania01.Designer.cs" />
     <Compile Remove="Migrations\20220319160006_databaseTriMania01.cs" />
     <Compile Remove="Migrations\20220319160006_databaseTriMania01.Designer.cs" />
+    <Compile Remove="Migrations\20220319204631_databaseTriMania01.cs" />
+    <Compile Remove="Migrations\20220319204631_databaseTriMania01.Designer.cs" />
+    <Compile Remove="Migrations\20220321223947_databaseTriMania02.cs" />
+    <Compile Remove="Migrations\20220321223947_databaseTriMania02.Designer.cs" />
     <Compile Remove="Migrations\20220322235212_databaseTriMania03.cs" />
     <Compile Remove="Migrations\20220322235212_databaseTriMania03.Designer.cs" />
     <Compile Remove="Migrations\20220323000745_databaseTriMania03.cs" />
     <Compile Remove="Migrations\20220323000745_databaseTriMania03.Designer.cs" />
+    <Compile Remove="Migrations\20220323001334_databaseTriMania03.cs" />
+    <Compile Remove="Migrations\20220323001334_databaseTriMania03.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -47,6 +53,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.2" />
   </ItemGroup>
 
   <ItemGroup>

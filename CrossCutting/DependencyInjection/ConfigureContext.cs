@@ -21,9 +21,13 @@ namespace CrossCutting.DependencyInjection
 
             services.AddScoped<TriManiaContext, TriManiaContext>();
 
+            //services.AddDbContext<TriManiaContext>(options =>
+            //    options.UseSqlServer(connectionStrings)
+            //   );
+
             services.AddDbContext<TriManiaContext>(options =>
-                options.UseSqlServer(connectionStrings)
-               );
+                options.UseMySql(connectionStrings)
+            );
 
         }
     }
