@@ -1,4 +1,6 @@
-﻿using Domain.Interfaces;
+﻿using Core.Interfaces;
+using Domain.Interfaces;
+using Infrastructure.Dapper.Data;
 using Infrastructure.Data;
 using Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
@@ -21,9 +23,10 @@ namespace CrossCutting.DependencyInjection
 
             services.AddScoped<TriManiaContext, TriManiaContext>();
 
-            //services.AddDbContext<TriManiaContext>(options =>
-            //    options.UseSqlServer(connectionStrings)
-            //   );
+
+            services.AddScoped<IUserRepositoryDP, UserRepositoryDP>();
+            services.AddScoped<IOrderRepositoryDP, OrderRepositoryDP>();
+            services.AddScoped<IProductRepositoryDP, ProductRepositoryDP>();
 
             services.AddDbContext<TriManiaContext>(options =>
                 options.UseMySql(connectionStrings)

@@ -36,7 +36,7 @@ namespace Domain.Commands.Handlers
                 Address address = _mapper.Map<Address>(request);
 
                 user.SetUserType(UserType.Client);
-                user.EncryptPassword();
+                user.EncryptPassword(request.Passworld);
 
                 await ValidationUser(user);
 

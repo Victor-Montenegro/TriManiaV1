@@ -21,7 +21,7 @@ namespace Infrastructure.Repository
         {
             try
             {
-                return await _dataSet.Where(x => x.Name == name).AsNoTracking().FirstOrDefaultAsync();
+                return await _dataSet.Where(x => x.Name == name && x.DeletionDate == null).AsNoTracking().FirstOrDefaultAsync();
             }
             catch (Exception ex)
             {

@@ -23,7 +23,7 @@ namespace Infrastructure.Repository
         {
             try
             {
-                return await _dataSet.Where(x => x.User.Id == userId).AsNoTracking().FirstOrDefaultAsync();
+                return await _dataSet.Where(x => x.User.Id == userId && x.DeletionDate == null).AsNoTracking().FirstOrDefaultAsync();
             }
             catch (Exception ex)
             {

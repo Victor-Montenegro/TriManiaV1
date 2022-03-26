@@ -3,7 +3,6 @@ using Domain.Interfaces;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,27 +17,11 @@ namespace Infrastructure.Repository
             _dataSet = context.Set<User>();
         }
 
-        public async Task<List<User>> GetAllByPage(int page)
-        {
-            try
-            {
-                //int count = await _dataSet.CountAsync();
-
-                var result = await _dataSet.Skip(page * 10).Take(10).AsNoTracking().ToListAsync();
-
-                return result;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
         public async Task<User> GetUserByCpfOrCnpj(string taxNumber)
         {
             try
             {
-                return await _dataSet.Where(x => x.Cpf == taxNumber).AsNoTracking().FirstOrDefaultAsync();
+                return await _dataSet.Where(x => x.Cpf == taxNumber && x.DeletionDate == null).AsNoTracking().FirstOrDefaultAsync();
             }
             catch (Exception ex)
             {
@@ -50,7 +33,7 @@ namespace Infrastructure.Repository
         {
             try
             {
-                return await _dataSet.Where(x => x.Email == email ).AsNoTracking().FirstOrDefaultAsync();
+                return await _dataSet.Where(x => x.Email == email && x.DeletionDate == null).AsNoTracking().FirstOrDefaultAsync();
             }
             catch (Exception ex)
             {
@@ -62,7 +45,7 @@ namespace Infrastructure.Repository
         {
             try
             {
-                return _dataSet.Where(x => x.Login == login).AsNoTracking().FirstOrDefaultAsync();
+                return _dataSet.Where(x => x.Login == login && x.DeletionDate == null).AsNoTracking().FirstOrDefaultAsync();
             }
             catch (Exception ex)
             {
@@ -74,7 +57,7 @@ namespace Infrastructure.Repository
         {
             try
             {
-                return _dataSet.Where(x => x.Login == login && x.Passworld == passworld).AsNoTracking().FirstOrDefaultAsync();
+                return _dataSet.Where(x => x.Login == login && x.Passworld == passworld && x.DeletionDate == null).AsNoTracking().FirstOrDefaultAsync();
             }
             catch (Exception ex)
             {

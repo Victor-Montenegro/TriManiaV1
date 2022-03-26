@@ -27,9 +27,11 @@ namespace Infrastructure.Migrations
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<DateTime>("CreateDate")
+                        .HasColumnName("CreateDate")
                         .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DeletionDate")
+                        .HasColumnName("DeletionDate")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Neighborhood")
@@ -69,7 +71,7 @@ namespace Infrastructure.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("CreateDate")
-                        .HasColumnName("CreationDate")
+                        .HasColumnName("CreateDate")
                         .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DeletionDate")
@@ -189,7 +191,7 @@ namespace Infrastructure.Migrations
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<DateTime>("CreateDate")
-                        .HasColumnName("CreationDate")
+                        .HasColumnName("CreateDate")
                         .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DeletionDate")
@@ -222,9 +224,9 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            BirthDay = new DateTime(2022, 3, 25, 17, 37, 44, 91, DateTimeKind.Local).AddTicks(7716),
+                            BirthDay = new DateTime(2022, 3, 26, 9, 27, 9, 168, DateTimeKind.Local).AddTicks(3202),
                             Cpf = "00000000000",
-                            CreateDate = new DateTime(2022, 3, 25, 17, 37, 44, 92, DateTimeKind.Local).AddTicks(4503),
+                            CreateDate = new DateTime(2022, 3, 26, 9, 27, 9, 169, DateTimeKind.Local).AddTicks(96),
                             Email = "admin@admin.com.br",
                             Login = "admin",
                             Name = "Admin",

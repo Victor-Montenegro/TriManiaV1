@@ -24,7 +24,7 @@ namespace Infrastructure.Mappers
                 .HasColumnName("BirthDay");
 
             builder.Property(x => x.CreateDate)
-                .HasColumnName("CreationDate");
+                .HasColumnName("CreateDate");
 
             builder.Property(x => x.DeletionDate)
                 .HasColumnName("DeletionDate");

@@ -11,7 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "..\Domain\Domain.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrossCutting", "..\CrossCutting\CrossCutting.csproj", "{8C764D93-4756-45B6-BE07-B469D2A46ABC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainService", "..\DomainService\DomainService.csproj", "{7A6614CD-5A72-4DFA-8BCF-B46EA1F2BF53}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainService", "..\DomainService\DomainService.csproj", "{7A6614CD-5A72-4DFA-8BCF-B46EA1F2BF53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "..\Core\Core.csproj", "{3705A009-40D8-4FDC-B784-685C97D903F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Dapper", "..\Infrastructure.Dapper\Infrastructure.Dapper.csproj", "{8DD94562-1B03-44E4-A8DA-839B04374930}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,14 @@ Global
 		{7A6614CD-5A72-4DFA-8BCF-B46EA1F2BF53}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A6614CD-5A72-4DFA-8BCF-B46EA1F2BF53}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A6614CD-5A72-4DFA-8BCF-B46EA1F2BF53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3705A009-40D8-4FDC-B784-685C97D903F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3705A009-40D8-4FDC-B784-685C97D903F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3705A009-40D8-4FDC-B784-685C97D903F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3705A009-40D8-4FDC-B784-685C97D903F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DD94562-1B03-44E4-A8DA-839B04374930}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DD94562-1B03-44E4-A8DA-839B04374930}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DD94562-1B03-44E4-A8DA-839B04374930}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DD94562-1B03-44E4-A8DA-839B04374930}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

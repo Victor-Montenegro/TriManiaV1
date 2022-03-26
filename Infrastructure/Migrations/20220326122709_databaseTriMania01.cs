@@ -32,7 +32,7 @@ namespace Infrastructure.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    CreationDate = table.Column<DateTime>(nullable: false),
+                    CreateDate = table.Column<DateTime>(nullable: false),
                     DeletionDate = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     Login = table.Column<string>(nullable: true),
@@ -79,7 +79,7 @@ namespace Infrastructure.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    CreationDate = table.Column<DateTime>(nullable: false),
+                    CreateDate = table.Column<DateTime>(nullable: false),
                     DeletionDate = table.Column<DateTime>(nullable: true),
                     TotalValue = table.Column<decimal>(type: "DECIMAL(15,2)", nullable: false),
                     CancelDate = table.Column<DateTime>(nullable: true),
@@ -131,8 +131,8 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "User",
-                columns: new[] { "Id", "BirthDay", "CPF", "CreationDate", "DeletionDate", "Email", "Login", "Name", "Passworld", "Type" },
-                values: new object[] { 1, new DateTime(2022, 3, 25, 17, 37, 44, 91, DateTimeKind.Local).AddTicks(7716), "00000000000", new DateTime(2022, 3, 25, 17, 37, 44, 92, DateTimeKind.Local).AddTicks(4503), null, "admin@admin.com.br", "admin", "Admin", "BA3253876AED6BC22D4A6FF53D8406C6AD864195ED144AB5C87621B6C233B548BAEAE6956DF346EC8C17F5EA10F35EE3CBC514797ED7DDD3145464E2A0BAB413", (sbyte)1 });
+                columns: new[] { "Id", "BirthDay", "CPF", "CreateDate", "DeletionDate", "Email", "Login", "Name", "Passworld", "Type" },
+                values: new object[] { 1, new DateTime(2022, 3, 26, 9, 27, 9, 168, DateTimeKind.Local).AddTicks(3202), "00000000000", new DateTime(2022, 3, 26, 9, 27, 9, 169, DateTimeKind.Local).AddTicks(96), null, "admin@admin.com.br", "admin", "Admin", "BA3253876AED6BC22D4A6FF53D8406C6AD864195ED144AB5C87621B6C233B548BAEAE6956DF346EC8C17F5EA10F35EE3CBC514797ED7DDD3145464E2A0BAB413", (sbyte)1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Address_UserId",

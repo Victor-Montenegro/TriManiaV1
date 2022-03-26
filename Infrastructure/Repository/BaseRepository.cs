@@ -43,11 +43,9 @@ namespace Infrastructure.Repository
         {
             try
             {
-                var result = await _dataSet.Where(x => x.Id == id).AsNoTracking().SingleOrDefaultAsync();
+                var result = await _dataSet.Where(x => x.Id == id && x.DeletionDate == null).AsNoTracking().SingleOrDefaultAsync();
 
                 result.DeletionDate = DateTime.Now;
-
-                //_dataSet.Remove(result);
 
                 _context.Entry(result).State = EntityState.Modified;
 
@@ -91,10 +89,6 @@ namespace Infrastructure.Repository
         {
             try
             {
-                //var result = await _dataSet.Where(x => x.Id == data.Id).AsNoTracking().SingleOrDefaultAsync();
-
-                data.CreateDate = DateTime.Now;
-
                 _context.Entry(data).State = EntityState.Modified;
 
                 await _context.SaveChangesAsync();

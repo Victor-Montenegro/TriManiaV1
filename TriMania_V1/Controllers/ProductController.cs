@@ -1,5 +1,5 @@
-﻿using Domain.Commands.Requests;
-using Domain.Interfaces;
+﻿using Core.Interfaces;
+using Domain.Commands.Requests;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -16,11 +16,14 @@ namespace TriMania_V1.Controllers
         #region swagger
         /// <summary>
         /// Realiza a criação de produtos
+        /// || Só acessado pelo ADMIN
         /// </summary>
         /// <remarks>
         /// </remarks>
         /// <response code="200">Retorna o Produto criado</response>
         /// <response code="400">Retorna quando a dados invalidos</response>
+        /// <response code="401">Retorna quando não foi feito o login</response>
+        /// <response code="403">Retorna a autorição foi negada</response>
         #endregion
         [HttpPost]
         [Route("createproduct")]
@@ -50,21 +53,22 @@ namespace TriMania_V1.Controllers
         /// </summary>
         /// <remarks>
         /// </remarks>
-        /// <response code="200">Lista de produtos criados/response>
+        /// <response code="200">Retorna o Produto criado</response>
+        /// <response code="400">Retorna quando a dados invalidos ou alguma validação errada</response>
         #endregion
         [HttpGet]
         [Route("getallproduct")]
-        public async Task<IActionResult> GetAllProduct([FromServices]IProductRepository productRepository)
+        public async Task<IActionResult> GetAllProduct([FromServices] IProductRepositoryDP query)
         {
             try
             {
-                var response = await productRepository.GetAll();
+                var response = await query.GetAllProduts();
 
                 return Ok(response);
             }
             catch (Exception ex)
             {
-                return BadRequest("Tente novamente mais tarde");
+                return BadRequest("Não foi possível retorna a lista de produtos");
             }
         }
     }

@@ -24,6 +24,12 @@ namespace Infrastructure.Mappers
             builder.Property(x => x.Street).
                 HasColumnName("Street");
 
+            builder.Property(x => x.CreateDate)
+                .HasColumnName("CreateDate");
+
+            builder.Property(x => x.DeletionDate)
+                .HasColumnName("DeletionDate");
+
             builder.HasOne(x => x.User)
                 .WithMany()
                 .HasForeignKey(x => x.UserId);

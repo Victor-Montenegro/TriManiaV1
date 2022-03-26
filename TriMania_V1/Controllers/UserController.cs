@@ -1,6 +1,6 @@
-﻿using Domain.Commands.Requests;
+﻿using Core.Interfaces;
+using Domain.Commands.Requests;
 using Domain.Commands.Responses;
-using Domain.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -69,34 +69,113 @@ namespace TriMania_V1.Controllers
         #region swagger
         /// <summary>
         /// Lista de usuarios criados.
+        /// || Só é acessado pelo ADMIN
         /// </summary>
-        /// <param name="page"></param>
-        /// <returns>Lista de 0 a 10 usuarios por pagina</returns>
         /// <remarks>
+        /// 
+        /// request:
+        /// 
+        ///     {
+        ///         "filter": "Victorr",
+        ///         "numberPage": 0
+        ///     }
         /// </remarks>
-        /// <response code="200">Retorna uma lista paginada de até 10 usuarios</response>
+        /// <response code="200">Retorna uma lista paginada de até 10 usuarios de acordo com o filtro</response>
         /// <response code="401">Retorna quando foi realizado a autenticação</response>
         /// <response code="403">Retorna quando a autorização e negada</response>
         #endregion
-        [HttpGet]
-        [Route("getusers/{page:int}")]
-        [Authorize(Roles ="Manager")]
+        [HttpPost]
+        [Route("getAllUsers")]
+        [Authorize(Roles = "Manager")]
         [ErrorsValidation]
-        public async Task<IActionResult> GetAllUser(int page,
-            [FromServices]IUserRepository userRepository )
+        public async Task<IActionResult> GetAllUsers([FromBody]GetAllUserRequest request,
+            [FromServices] IUserRepositoryDP query)
         {
             try
             {
-                var users = await userRepository.GetAllByPage(page);
+                var response = await query.GetUserByFilters(request.Filter, request.NumberPage);
 
-                if (users is null)
-                    return BadRequest("");
-
-                return Ok(users);
+                return Ok(response);
             }
             catch (Exception ex)
             {
-                return BadRequest("");
+                return BadRequest("Não foi possivel retorna a lista de usuarios");
+            }
+        }
+
+        #region swagger
+        /// <summary>
+        /// Retorna um usário criado no sistema
+        /// || O usário deve está logado 
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <response code="200">Retorna o usuário</response>
+        /// <response code="400">Retorno quando a alguma informação ou validação errada</response>
+        /// <response code="401">Retorno quando não foi feito o login</response>
+        #endregion
+        [HttpGet]
+        [Route("getUserById/{id:int}")]
+        [Authorize]
+        public async Task<IActionResult> GetUser(int id,
+            [FromServices]IUserRepositoryDP query)
+        {
+            try
+            {
+                var userAuthorize = int.Parse(User.Identity.Name);
+
+                if (!userAuthorize.Equals(id))
+                    return BadRequest("Usuario informado não existe");
+
+                var response = await query.GetById(id);
+
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Não foi possivel retorna um usuario");
+            }
+        }
+
+
+        #region swagger
+        /// <summary>
+        /// Deleta um usário do sistema
+        /// || só é acessado pelo ADMIN
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// request:
+        ///
+        ///     {
+        ///         "userId": 2
+        ///     }
+        /// </remarks>
+        /// <response code="200">Retorna o usuário deletado</response>
+        /// <response code="400">Retorno quando a alguma informação ou validação errada</response>
+        /// <response code="401">Retorno quando não foi feito o login</response>
+        /// <response code="403">Retorno quando a autorização foi negada</response>
+        #endregion
+        [HttpPost]
+        [Route("deleteUser")]
+        [Authorize(Roles = "Manager")]
+        [ErrorsValidation]
+        public async Task<IActionResult> DeleteUser(DeleteUserRequest command,
+            [FromServices]IMediator handler)
+        {
+            try
+            {
+                var response = await handler.Send(command);
+
+                if (response.Success)
+                    return Ok(response);
+                else
+                    return BadRequest(response);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Não Foi Possivel remover o usuário");
             }
         }
     }

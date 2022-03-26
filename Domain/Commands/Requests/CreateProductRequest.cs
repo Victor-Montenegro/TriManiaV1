@@ -23,13 +23,14 @@ namespace Domain.Commands.Requests
         public string Description { get; set; }
 
         #region validações 
+        [Required(ErrorMessageResourceType = typeof(ApiMsg), ErrorMessageResourceName = "DataAnnotationError_00001")]
         [Range(0,int.MaxValue, ErrorMessageResourceType = typeof(ApiMsg), ErrorMessageResourceName = "DataAnnotationError_00004")]
         #endregion
         public int Quantity { get; set; }
 
         #region validações 
         [Required(ErrorMessageResourceType = typeof(ApiMsg), ErrorMessageResourceName = "DataAnnotationError_00001")]
-        [Range(0.0,double.MaxValue, ErrorMessageResourceType = typeof(ApiMsg), ErrorMessageResourceName = "DataAnnotationError_00004")]
+        [Range(0.1,double.MaxValue, ErrorMessageResourceType = typeof(ApiMsg), ErrorMessageResourceName = "DataAnnotationError_00004")]
         #endregion
         public decimal Price { get; set; }
     }

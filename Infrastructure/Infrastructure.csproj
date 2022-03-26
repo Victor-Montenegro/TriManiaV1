@@ -39,6 +39,8 @@
     <Compile Remove="Migrations\20220323000745_databaseTriMania03.Designer.cs" />
     <Compile Remove="Migrations\20220323001334_databaseTriMania03.cs" />
     <Compile Remove="Migrations\20220323001334_databaseTriMania03.Designer.cs" />
+    <Compile Remove="Migrations\20220325203744_databaseTriMania01.cs" />
+    <Compile Remove="Migrations\20220325203744_databaseTriMania01.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -58,6 +60,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>
