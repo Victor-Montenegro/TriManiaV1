@@ -1,5 +1,5 @@
 # TriManiaV1
-Projeto com a finalidade de praticar os conceitos de arquitetura limpa, CQRS, MediatR e EF.
+Projeto com a finalidade de praticar os conceitos de arquitetura limpa, CQRS, MediatR, Dapper, EF, conceitos de SOLID.
 
 # Passo a Passo
   Realize o clone do repositorio na sua maquina 
