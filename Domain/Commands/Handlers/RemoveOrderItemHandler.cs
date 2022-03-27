@@ -9,6 +9,7 @@ using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -33,6 +34,8 @@ namespace Domain.Commands.Handlers
             try
             {
                 Order order = await ValidationUserAndOrder(request.UserId);
+
+                ValidationItem(request.Items);
 
                 List<string> validations = new List<string>();
 
@@ -71,6 +74,15 @@ namespace Domain.Commands.Handlers
             catch (Exception ex)
             {
                 return NotSuccessResponse(ex.Message);
+            }
+        }
+
+        public void ValidationItem(List<ListRemoveOrderItemRequest> items)
+        {
+            foreach (var item in items)
+            {
+                if (!items.Count(x => x.OrderItemId == item.OrderItemId).Equals(1))
+                    throw new Exception(string.Format(RemoveOrderItemMsg.RemoveOrderItem_NotSuccess_0003, item.OrderItemId));
             }
         }
 

@@ -123,4 +123,7 @@
   <data name="RemoveOrderItem_NotSuccess_0002" xml:space="preserve">
     <value>Não será possível remover todos os item do seu pedido {0}, pois deve ter ao menos um item cadastrado</value>
   </data>
+  <data name="RemoveOrderItem_NotSuccess_0003" xml:space="preserve">
+    <value>O orderItemId {0} está sendo repetido</value>
+  </data>
 </root>

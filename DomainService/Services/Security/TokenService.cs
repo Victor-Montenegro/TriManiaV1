@@ -17,7 +17,7 @@ namespace DomainService.Services.Security
                     new Claim(ClaimTypes.Name, userId),
                     new Claim(ClaimTypes.Role, userType)
                 }),
-                Expires = DateTime.UtcNow.AddMinutes(2),
+                Expires = DateTime.UtcNow.AddMinutes(50),
                 SigningCredentials = signingConfigurationService.SigningCredentials
             };
 

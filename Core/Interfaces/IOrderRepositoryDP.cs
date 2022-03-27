@@ -7,5 +7,7 @@ namespace Core.Interfaces
     public interface IOrderRepositoryDP 
     {
         public Task<SalesReportModel> GetSalesReport(string initialDate, string finishDate, List<int> status, List<int> users);
+
+        public Task<OrderModel> GetOrderOpen(int userId);
     }
 }

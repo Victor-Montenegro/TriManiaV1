@@ -23,7 +23,6 @@ namespace TriMania_V1.Controllers
         /// 
         /// request:
         ///
-        ///     POST /Login
         ///     {
         ///         "userId": 2,
         ///         "items": [
@@ -333,11 +332,53 @@ namespace TriMania_V1.Controllers
                 if (salesReport.Users.Count.Equals(0))
                     return BadRequest(CreateOrderControllerMsg.TryValidateModel_Error_00005);
 
+                if (DateTime.Parse(salesReport.InitialDate) >= DateTime.Parse(salesReport.FinishDate))
+                    return BadRequest("A data inicial deve ser menor do que a data final");
+
                 var response = await query.GetSalesReport(salesReport.InitialDate, salesReport.FinishDate, salesReport.Status, salesReport.Users);
 
                 return Ok(response);
             }
             catch (Exception ex)
+            {
+                return BadRequest(ApiMsg.Error_Status_500);
+            }
+        }
+
+        #region swagger
+        /// <summary>
+        /// Retorna o pedido que esteja aberto pelo usuário
+        /// || O usúário deve está logado
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <response code="200">Retorna o pedido do usuário que ainda não esteja fechado ou finalizado </response>
+        /// <response code="400">Retorno quando a alguma informação ou validação errada</response>
+        /// <response code="401">Retorno quando não foi feito o login</response>
+        /// <response code="403">Retorno quando a autorização e negada</response>
+        #endregion
+        [HttpGet]
+        [Route("getOrderOpen/{userId:int}")]
+        [Authorize]
+        public async Task<IActionResult> GetOrderOpen(int userId,
+            [FromServices]IOrderRepositoryDP query)
+        {
+            try
+            {
+                var userAuthorize = int.Parse(User.Identity.Name);
+
+                if (!userAuthorize.Equals(userId))
+                    return BadRequest(ApiMsg.Authorize_Error_00001);
+
+                var response = await query.GetOrderOpen(userId);
+
+                if (response is null)
+                    return Ok(CreateOrderControllerMsg.Result_Ok_00001);
+                else
+                    return Ok(response);
+            }
+            catch (Exception)
             {
                 return BadRequest(ApiMsg.Error_Status_500);
             }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Core.Models
 {
@@ -19,5 +20,7 @@ namespace Core.Models
         public int Type { get; set; }
 
         public int UserId { get; set; }
+
+        public List<OrderItemModel> Items { get; set; } = new List<OrderItemModel>();
     }
 }

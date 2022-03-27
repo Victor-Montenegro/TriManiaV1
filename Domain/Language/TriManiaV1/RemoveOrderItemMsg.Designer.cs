@@ -77,5 +77,14 @@ namespace Domain.Language.TriManiaV1 {
                 return ResourceManager.GetString("RemoveOrderItem_NotSuccess_0002", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O orderItemId {0} está sendo repetido.
+        /// </summary>
+        internal static string RemoveOrderItem_NotSuccess_0003 {
+            get {
+                return ResourceManager.GetString("RemoveOrderItem_NotSuccess_0003", resourceCulture);
+            }
+        }
     }
 }

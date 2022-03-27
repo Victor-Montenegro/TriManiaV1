@@ -61,6 +61,15 @@ namespace Domain.Language.API {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Não existe pedido que esteja aberto.
+        /// </summary>
+        public static string Result_Ok_00001 {
+            get {
+                return ResourceManager.GetString("Result_Ok_00001", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Informe ao menos um produto no seu pedido.
         /// </summary>
         public static string TryValidateModel_Error_00001 {

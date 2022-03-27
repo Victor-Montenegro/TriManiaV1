@@ -25,7 +25,6 @@ namespace TriMania_V1.Controllers
         /// 
         /// request:
         ///
-        ///     POST /User
         ///     {
         ///        "Name" : "João Victor Montenegro Rocha",
         ///        "Login" : "48957309055",
