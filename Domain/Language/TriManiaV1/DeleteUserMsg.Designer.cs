@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Domain.Language.API {
+namespace Domain.Language.TriManiaV1 {
     using System;
     
     
@@ -22,24 +22,24 @@ namespace Domain.Language.API {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ApiMsg {
+    internal class DeleteUserMsg {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ApiMsg() {
+        internal DeleteUserMsg() {
         }
         
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Domain.Language.API.ApiMsg", typeof(ApiMsg).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Domain.Language.TriManiaV1.DeleteUserMsg", typeof(DeleteUserMsg).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,7 +51,7 @@ namespace Domain.Language.API {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,56 +61,20 @@ namespace Domain.Language.API {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Usuario informado não existe.
+        ///   Looks up a localized string similar to O Usuário não pode ser removido enquanto tiver a ordem {0} aberta.
         /// </summary>
-        public static string Authorize_Error_00001 {
+        internal static string DeleteUser_NotSuccess_0001 {
             get {
-                return ResourceManager.GetString("Authorize_Error_00001", resourceCulture);
+                return ResourceManager.GetString("DeleteUser_NotSuccess_0001", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to O campo {0} é obrigatório.
+        ///   Looks up a localized string similar to Usuário {0} removido com sucesso.
         /// </summary>
-        public static string DataAnnotationError_00001 {
+        internal static string DeleteUser_Success_0001 {
             get {
-                return ResourceManager.GetString("DataAnnotationError_00001", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to O campo {0} deve ter no mínimo {1} caracteres.
-        /// </summary>
-        public static string DataAnnotationError_00002 {
-            get {
-                return ResourceManager.GetString("DataAnnotationError_00002", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to O campo {0} deve ter no maximo {1} caracteres.
-        /// </summary>
-        public static string DataAnnotationError_00003 {
-            get {
-                return ResourceManager.GetString("DataAnnotationError_00003", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Informe um {0} valido.
-        /// </summary>
-        public static string DataAnnotationError_00004 {
-            get {
-                return ResourceManager.GetString("DataAnnotationError_00004", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Não foi possível realizar essa operação, tente novamente mais tarde.
-        /// </summary>
-        public static string Error_Status_500 {
-            get {
-                return ResourceManager.GetString("Error_Status_500", resourceCulture);
+                return ResourceManager.GetString("DeleteUser_Success_0001", resourceCulture);
             }
         }
     }

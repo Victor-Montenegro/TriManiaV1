@@ -1,6 +1,7 @@
 ﻿using Core.Interfaces;
 using Domain.Commands.Requests;
 using Domain.Commands.Responses;
+using Domain.Language.API;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -99,7 +100,7 @@ namespace TriMania_V1.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest("Não foi possivel retorna a lista de usuarios");
+                return BadRequest(ApiMsg.Error_Status_500);
             }
         }
 
@@ -126,7 +127,7 @@ namespace TriMania_V1.Controllers
                 var userAuthorize = int.Parse(User.Identity.Name);
 
                 if (!userAuthorize.Equals(id))
-                    return BadRequest("Usuario informado não existe");
+                    return BadRequest(ApiMsg.Authorize_Error_00001);
 
                 var response = await query.GetById(id);
 
@@ -134,7 +135,7 @@ namespace TriMania_V1.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest("Não foi possivel retorna um usuario");
+                return BadRequest(ApiMsg.Error_Status_500);
             }
         }
 
@@ -175,7 +176,7 @@ namespace TriMania_V1.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest("Não Foi Possivel remover o usuário");
+                return BadRequest(ApiMsg.Error_Status_500);
             }
         }
     }

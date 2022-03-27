@@ -2,6 +2,7 @@
 using Domain.Commands.Responses;
 using Domain.Entities;
 using Domain.Interfaces;
+using Domain.Language.TriManiaV1;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -33,11 +34,11 @@ namespace Domain.Commands.Handlers
 
                 await _orderRepository.Update(order);
 
-                return SuccessResponse(string.Format("O pedido {0} foi cancelado com sucesso", order.Id));
+                return SuccessResponse(string.Format(CancelledOrderMsg.CancelledOrder_Success_00001, order.Id));
             }
             catch(DBConcurrencyException ex)
             {
-                return NotSuccessResponse("Não foi possivel cancelar a sua ordem, tente novamente mais tarde");
+                return NotSuccessResponse(HandlerMsg.Handler_Errors_00001);
             }
             catch (Exception ex)
             {
@@ -50,12 +51,12 @@ namespace Domain.Commands.Handlers
             var isUserExist = await _userRepository.GetById(userId);
 
             if (isUserExist is null)
-                throw new Exception("O usuario não existe");
+                throw new Exception(HandlerMsg.Handler_NotSuccess_Validations_00001);
 
             var isOrderExist = await _orderRepository.GetOpenOrderByUserId(userId);
 
             if (isOrderExist is null)
-                throw new Exception("Não existe nenhum pedido em andamento");
+                throw new Exception(HandlerMsg.Handler_NotSuccess_Validations_00002);
 
             return isOrderExist;
         }

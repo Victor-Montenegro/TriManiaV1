@@ -85,7 +85,7 @@ namespace Domain.Commands.Handlers
             foreach(var item in items)
             {
                 if (!items.Count(x => x.ProductId == item.ProductId).Equals(1))
-                    throw new Exception(string.Format(CreateOrderMsg.CreateOrderValidationError_0005,item.ProductId));
+                    throw new Exception(string.Format(CreateOrderMsg.CreateOrder_NotSuccess_0004, item.ProductId));
             }              
         }
 
@@ -94,12 +94,12 @@ namespace Domain.Commands.Handlers
             var isUserExist = await _userRepository.GetById(userId);
 
             if (isUserExist is null)
-                throw new Exception(CreateOrderMsg.CreateOrderValidationError_0004);
+                throw new Exception(HandlerMsg.Handler_NotSuccess_Validations_00001);
 
             var isOrderProgress = await _orderRepository.GetOpenOrderByUserId(userId);
 
             if (!(isOrderProgress is null))
-                throw new Exception(string.Format(CreateOrderMsg.CreateOrderValidationError_0003, isOrderProgress.Id));
+                throw new Exception(string.Format(CreateOrderMsg.CreateOrder_NotSuccess_0003, isOrderProgress.Id));
 
             return true;
         }
@@ -109,10 +109,10 @@ namespace Domain.Commands.Handlers
             var isProductExist = await _productRepository.GetById(item.ProductId);
 
             if (isProductExist is null)
-                return string.Format(CreateOrderMsg.CreateOrderValidationError_0001, item.ProductId);
+                return string.Format(CreateOrderMsg.CreateOrder_NotSuccess_0001, item.ProductId);
 
             if (!isProductExist.HasStock(item.Quantity))
-                return string.Format(CreateOrderMsg.CreateOrderValidationError_0002, item.ProductId);
+                return string.Format(CreateOrderMsg.CreateOrder_NotSuccess_0002, item.ProductId);
 
             return string.Empty;
         }

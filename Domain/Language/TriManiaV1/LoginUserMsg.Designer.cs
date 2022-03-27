@@ -59,5 +59,14 @@ namespace Domain.Language.TriManiaV1 {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login ou senha incorretos.
+        /// </summary>
+        internal static string LoginUser_NotSuccess_0001 {
+            get {
+                return ResourceManager.GetString("LoginUser_NotSuccess_0001", resourceCulture);
+            }
+        }
     }
 }

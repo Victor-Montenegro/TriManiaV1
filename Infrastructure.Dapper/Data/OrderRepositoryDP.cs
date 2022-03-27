@@ -32,6 +32,7 @@ namespace Infrastructure.Dapper.Data
                                     CreateDate > @initialDate AND 
                                     CreateDate < @finishDate AND
                                     DeletionDate IS NULL;
+
                                 SELECT
                                     Id,
                                     UserId,

@@ -2,6 +2,7 @@
 using Domain.Commands.Responses;
 using Domain.Entities;
 using Domain.Interfaces;
+using Domain.Language.TriManiaV1;
 using DomainService.Services.Security;
 using MediatR;
 using System;
@@ -46,7 +47,7 @@ namespace Domain.Commands.Handlers
             User isUserExist = await _userRepository.GetUserByLoginAndPassworld(request.Login, request.Passworld);
 
             if (isUserExist is null)
-                throw new Exception("Login ou senha incorretos");
+                throw new Exception(LoginUserMsg.LoginUser_NotSuccess_0001);
 
             return isUserExist;
         }

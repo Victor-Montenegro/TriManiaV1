@@ -4,6 +4,7 @@ using Domain.Commands.Responses;
 using Domain.Entities;
 using Domain.Enums;
 using Domain.Interfaces;
+using Domain.Language.TriManiaV1;
 using Domain.Models;
 using MediatR;
 using System;
@@ -90,7 +91,7 @@ namespace Domain.Commands.Handlers
             }
             catch (DBConcurrencyException ex)
             {
-                return NotSuccessResponse("Não foi possivel atualizar a sua ordem, tente novamente mais tarde");
+                return NotSuccessResponse(HandlerMsg.Handler_Errors_00001);
             }
             catch (Exception ex)
             {
@@ -103,7 +104,7 @@ namespace Domain.Commands.Handlers
             foreach (var item in items)
             {
                 if (!items.Count(x => x.ProductId == item.ProductId).Equals(1))
-                    throw new Exception(string.Format("O item com o productId {0} está sendo repetido", item.ProductId));
+                    throw new Exception(string.Format(UpdateOrderMsg.UpdateOrder_NotSuccess_0001, item.ProductId));
             }
         }
 
@@ -112,10 +113,10 @@ namespace Domain.Commands.Handlers
             var isProductExist = await _productRepository.GetById(item.ProductId);
 
             if (isProductExist is null)
-                return string.Format("O productId {0} não existe", item.ProductId);
+                return string.Format(UpdateOrderMsg.UpdateOrder_NotSuccess_0002, item.ProductId);
 
             if (!isProductExist.HasStock(item.Quantity))
-                return string.Format("Estoque insuficiente para productId {0}", item.ProductId);
+                return string.Format(UpdateOrderMsg.UpdateOrder_NotSuccess_0003, item.ProductId);
 
             return string.Empty;
         }
@@ -125,12 +126,12 @@ namespace Domain.Commands.Handlers
             var isUserExist = await _userRepository.GetById(userId);
 
             if (isUserExist is null)
-                throw new Exception("O usuario não existe");
+                throw new Exception(HandlerMsg.Handler_NotSuccess_Validations_00001);
 
             var isOrderExist = await _orderRepository.GetOpenOrderByUserId(userId);
 
             if (isOrderExist is null)
-                throw new Exception("Não existe nenhum pedido em andamento");
+                throw new Exception(HandlerMsg.Handler_NotSuccess_Validations_00002);
 
             return isOrderExist;
         }

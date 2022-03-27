@@ -117,19 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CreateOrderValidationError_0001" xml:space="preserve">
+  <data name="CreateOrder_NotSuccess_0001" xml:space="preserve">
     <value>Esse productId {0} não existe</value>
   </data>
-  <data name="CreateOrderValidationError_0002" xml:space="preserve">
+  <data name="CreateOrder_NotSuccess_0002" xml:space="preserve">
     <value>Estoque insuficiente para esse productId {0}</value>
   </data>
-  <data name="CreateOrderValidationError_0003" xml:space="preserve">
+  <data name="CreateOrder_NotSuccess_0003" xml:space="preserve">
     <value>0 pedido {0} ainda está em andamento, por favor finalizar antes de criar um novo pedido</value>
   </data>
-  <data name="CreateOrderValidationError_0004" xml:space="preserve">
-    <value>O usuário informado não existe</value>
-  </data>
-  <data name="CreateOrderValidationError_0005" xml:space="preserve">
+  <data name="CreateOrder_NotSuccess_0004" xml:space="preserve">
     <value>O item com o productId {0} está sendo repetido</value>
   </data>
 </root>

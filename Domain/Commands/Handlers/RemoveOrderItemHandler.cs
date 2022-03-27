@@ -3,6 +3,7 @@ using Domain.Commands.Responses;
 using Domain.Entities;
 using Domain.Enums;
 using Domain.Interfaces;
+using Domain.Language.TriManiaV1;
 using Domain.Models;
 using MediatR;
 using System;
@@ -65,7 +66,7 @@ namespace Domain.Commands.Handlers
             }
             catch (DBConcurrencyException ex)
             {
-                return NotSuccessResponse("Não foi possivel remove os itens da sua ordem, tente novamente mais tarde");
+                return NotSuccessResponse(HandlerMsg.Handler_Errors_00001);
             }
             catch (Exception ex)
             {
@@ -78,7 +79,7 @@ namespace Domain.Commands.Handlers
             var isOrderItemExist = await _orderItemRepository.GetOrderItemByOrderItemIdAndOrderId(item.OrderItemId,orderId);
 
             if (isOrderItemExist is null)
-                return string.Format("Não existe o item {0} no pedido {1}", item.OrderItemId,orderId);
+                return string.Format(RemoveOrderItemMsg.RemoveOrderItem_NotSuccess_0001, item.OrderItemId,orderId);
 
             return string.Empty;
         }
@@ -88,7 +89,7 @@ namespace Domain.Commands.Handlers
             var quantityOrderItemExist = await _orderItemRepository.GetAllOrderItemByOrderId(orderId);
 
             if (quantityOrderItemExist.Count.Equals(items.Count))
-                throw new Exception(string.Format("Não será possível remover todos os item do seu pedido {0}, pois deve ter ao menos um item cadastrado", orderId));
+                throw new Exception(string.Format(RemoveOrderItemMsg.RemoveOrderItem_NotSuccess_0002, orderId));
 
             return true;
         }
@@ -98,12 +99,12 @@ namespace Domain.Commands.Handlers
             var isUserExist = await _userRepository.GetById(userId);
 
             if (isUserExist is null)
-                throw new Exception("O usuario não existe");
+                throw new Exception(HandlerMsg.Handler_NotSuccess_Validations_00001);
 
             var isOrderExist = await _orderRepository.GetOpenOrderByUserId(userId);
 
             if (isOrderExist is null)
-                throw new Exception("Não existe nenhum pedido em andamento");
+                throw new Exception(HandlerMsg.Handler_NotSuccess_Validations_00002);
 
             return isOrderExist;
         }

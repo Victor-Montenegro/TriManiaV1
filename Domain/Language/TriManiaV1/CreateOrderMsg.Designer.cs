@@ -63,45 +63,36 @@ namespace Domain.Language.TriManiaV1 {
         /// <summary>
         ///   Looks up a localized string similar to Esse productId {0} não existe.
         /// </summary>
-        public static string CreateOrderValidationError_0001 {
+        public static string CreateOrder_NotSuccess_0001 {
             get {
-                return ResourceManager.GetString("CreateOrderValidationError_0001", resourceCulture);
+                return ResourceManager.GetString("CreateOrder_NotSuccess_0001", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Estoque insuficiente para esse productId {0}.
         /// </summary>
-        public static string CreateOrderValidationError_0002 {
+        public static string CreateOrder_NotSuccess_0002 {
             get {
-                return ResourceManager.GetString("CreateOrderValidationError_0002", resourceCulture);
+                return ResourceManager.GetString("CreateOrder_NotSuccess_0002", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to 0 pedido {0} ainda está em andamento, por favor finalizar antes de criar um novo pedido.
         /// </summary>
-        public static string CreateOrderValidationError_0003 {
+        public static string CreateOrder_NotSuccess_0003 {
             get {
-                return ResourceManager.GetString("CreateOrderValidationError_0003", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to O usuário informado não existe.
-        /// </summary>
-        public static string CreateOrderValidationError_0004 {
-            get {
-                return ResourceManager.GetString("CreateOrderValidationError_0004", resourceCulture);
+                return ResourceManager.GetString("CreateOrder_NotSuccess_0003", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to O item com o productId {0} está sendo repetido.
         /// </summary>
-        public static string CreateOrderValidationError_0005 {
+        public static string CreateOrder_NotSuccess_0004 {
             get {
-                return ResourceManager.GetString("CreateOrderValidationError_0005", resourceCulture);
+                return ResourceManager.GetString("CreateOrder_NotSuccess_0004", resourceCulture);
             }
         }
     }

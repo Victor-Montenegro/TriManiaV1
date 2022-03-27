@@ -1,5 +1,6 @@
 ﻿using Core.Interfaces;
 using Domain.Commands.Requests;
+using Domain.Language.API;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -50,10 +51,10 @@ namespace TriMania_V1.Controllers
                 var userAuthorize = int.Parse(User.Identity.Name);
 
                 if (!userAuthorize.Equals(command.UserId))
-                    return BadRequest("Usuario informado não existe");
+                    return BadRequest(ApiMsg.Authorize_Error_00001);
 
                 if (command.Items.Count.Equals(0))
-                    return BadRequest("Informe ao menos um produto no seu pedido");
+                    return BadRequest(CreateOrderControllerMsg.TryValidateModel_Error_00001);
 
                 foreach (var item in command.Items)
                 {
@@ -70,7 +71,7 @@ namespace TriMania_V1.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest("Nao foi possivel criar um pedido");
+                return BadRequest(ApiMsg.Error_Status_500);
             }
         }
 
@@ -104,7 +105,7 @@ namespace TriMania_V1.Controllers
                 var userAuthorize = int.Parse(User.Identity.Name);
 
                 if (!userAuthorize.Equals(command.UserId))
-                    return BadRequest("Usuario informado não existe");
+                    return BadRequest(ApiMsg.Authorize_Error_00001);
 
                 var response = await handler.Send(command);
 
@@ -112,7 +113,7 @@ namespace TriMania_V1.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest("Não foi possivel completar o pedido");
+                return BadRequest(ApiMsg.Error_Status_500);
             }
         }
 
@@ -157,10 +158,10 @@ namespace TriMania_V1.Controllers
                 var userAuthorize = int.Parse(User.Identity.Name);
 
                 if (!userAuthorize.Equals(command.UserId))
-                    return BadRequest("Usuario informado não existe");
+                    return BadRequest(ApiMsg.Authorize_Error_00001);
 
                 if (command.Items.Count.Equals(0))
-                    return BadRequest("Informe ao menos um item para ser adicionado ou atualizado no pedido");
+                    return BadRequest(CreateOrderControllerMsg.TryValidateModel_Error_00002);
 
                 foreach (var item in command.Items)
                 {
@@ -177,7 +178,7 @@ namespace TriMania_V1.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest("Não foi possivel atualizar o seu pedido");
+                return BadRequest(ApiMsg.Error_Status_500);
             }
         }
 
@@ -218,10 +219,10 @@ namespace TriMania_V1.Controllers
                 var userAuthorize = int.Parse(User.Identity.Name);
 
                 if (!userAuthorize.Equals(command.UserId))
-                    return BadRequest("Usuario informado não existe");
+                    return BadRequest(ApiMsg.Authorize_Error_00001);
 
                 if (command.Items.Count.Equals(0))
-                    return BadRequest("Informe ao menos um item para ser removido do seu pedido");
+                    return BadRequest(CreateOrderControllerMsg.TryValidateModel_Error_00003);
 
                 foreach (var item in command.Items)
                 {
@@ -238,7 +239,7 @@ namespace TriMania_V1.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest("Não Foi possivel remover os itens do seu pedido");
+                return BadRequest(ApiMsg.Error_Status_500);
             }
         }
 
@@ -276,7 +277,7 @@ namespace TriMania_V1.Controllers
                 var userAuthorize = int.Parse(User.Identity.Name);
 
                 if (!userAuthorize.Equals(command.UserId))
-                    return BadRequest("Usuario informado não existe");
+                    return BadRequest(ApiMsg.Authorize_Error_00001);
 
                 var response = await handler.Send(command);
 
@@ -287,7 +288,7 @@ namespace TriMania_V1.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest("Não foi possivel cancelar o seu pedido");
+                return BadRequest(ApiMsg.Error_Status_500);
             }
         }
 
@@ -326,13 +327,19 @@ namespace TriMania_V1.Controllers
         {
             try
             {
+                if (salesReport.Status.Count.Equals(0))
+                    return BadRequest(CreateOrderControllerMsg.TryValidateModel_Error_00004);
+
+                if (salesReport.Users.Count.Equals(0))
+                    return BadRequest(CreateOrderControllerMsg.TryValidateModel_Error_00005);
+
                 var response = await query.GetSalesReport(salesReport.InitialDate, salesReport.FinishDate, salesReport.Status, salesReport.Users);
 
                 return Ok(response);
             }
             catch (Exception ex)
             {
-                return BadRequest("Não foi possível retorna o relatorio de vendas");
+                return BadRequest(ApiMsg.Error_Status_500);
             }
         }
     }

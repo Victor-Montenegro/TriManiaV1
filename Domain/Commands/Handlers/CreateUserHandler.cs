@@ -4,6 +4,7 @@ using Domain.Commands.Responses;
 using Domain.Entities;
 using Domain.Enums;
 using Domain.Interfaces;
+using Domain.Language.TriManiaV1;
 using DomainService.Services.Security;
 using MediatR;
 using System;
@@ -33,7 +34,7 @@ namespace Domain.Commands.Handlers
             try
             {
                 User user = _mapper.Map<User>(request);
-                Address address = _mapper.Map<Address>(request);
+                Address address = _mapper.Map<Address>(request.Address);
 
                 user.SetUserType(UserType.Client);
                 user.EncryptPassword(request.Passworld);
@@ -42,7 +43,7 @@ namespace Domain.Commands.Handlers
 
                 await _userRepository.Create(user);
 
-                address.User = user;
+                address.SetUserId(user.Id);
 
                 await _addressRepository.Create(address);
 
@@ -59,12 +60,12 @@ namespace Domain.Commands.Handlers
             var isExistLogin = await _userRepository.GetUserByLogin(user.Login);
 
             if (!(isExistLogin is null))
-                throw new Exception("Esse login já existe");
+                throw new Exception(CreateUserMsg.CreateUser_NotSuccess_0001);
 
             var isExistCpfOrCnpj = await _userRepository.GetUserByCpfOrCnpj(user.Cpf);
 
             if (!(isExistCpfOrCnpj is null))
-                throw new Exception("CPF/CNPJ informando já foi cadastrado");
+                throw new Exception(CreateUserMsg.CreateUser_NotSuccess_0002);
 
             return true;
         }

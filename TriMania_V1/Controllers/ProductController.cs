@@ -1,5 +1,6 @@
 ﻿using Core.Interfaces;
 using Domain.Commands.Requests;
+using Domain.Language.API;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -43,7 +44,7 @@ namespace TriMania_V1.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest("Tente novamente mais tarde");
+                return BadRequest(ApiMsg.Error_Status_500);
             }
         }
 
@@ -68,7 +69,7 @@ namespace TriMania_V1.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest("Não foi possível retorna a lista de produtos");
+                return BadRequest(ApiMsg.Error_Status_500);
             }
         }
     }

@@ -117,7 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="LoginUser_NotSuccess_0001" xml:space="preserve">
-    <value>Login ou senha incorretos</value>
+  <data name="RemoveOrderItem_NotSuccess_0001" xml:space="preserve">
+    <value>Não existe o item {0} no pedido {1}</value>
+  </data>
+  <data name="RemoveOrderItem_NotSuccess_0002" xml:space="preserve">
+    <value>Não será possível remover todos os item do seu pedido {0}, pois deve ter ao menos um item cadastrado</value>
   </data>
 </root>

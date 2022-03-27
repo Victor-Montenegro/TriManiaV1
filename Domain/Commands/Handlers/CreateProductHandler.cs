@@ -3,6 +3,7 @@ using Domain.Commands.Requests;
 using Domain.Commands.Responses;
 using Domain.Entities;
 using Domain.Interfaces;
+using Domain.Language.TriManiaV1;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -45,7 +46,7 @@ namespace Domain.Commands.Handlers
             var isNameProductExist = await _productRepository.GetProductByName(product.Name);
 
             if (!(isNameProductExist is null))
-                throw new Exception("Esse Produto já foi cadastrado");
+                throw new Exception(CreateProductMsg.CreateProduct_NotSuccess_0001);
 
             return true;
         }

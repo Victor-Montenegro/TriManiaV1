@@ -1,5 +1,6 @@
 ﻿using Domain.Commands.Requests;
 using Domain.Commands.Responses;
+using Domain.Language.API;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -46,7 +47,7 @@ namespace TriMania_V1.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest("");
+                return BadRequest(ApiMsg.Error_Status_500);
             }
         }
     }

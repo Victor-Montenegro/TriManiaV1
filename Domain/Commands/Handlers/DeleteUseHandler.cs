@@ -2,6 +2,7 @@
 using Domain.Commands.Responses;
 using Domain.Entities;
 using Domain.Interfaces;
+using Domain.Language.TriManiaV1;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -36,11 +37,11 @@ namespace Domain.Commands.Handlers
                 await _addressRepository.Delete(address.Id);
 
 
-                return SuccessResponse(string.Format("Usuário {0} removido com sucesso",user.Id));
+                return SuccessResponse(string.Format(DeleteUserMsg.DeleteUser_Success_0001, user.Id));
             }
             catch (DBConcurrencyException ex)
             {
-                return NotSucessResponse("Não foi possivel remover o usuário");
+                return NotSucessResponse(HandlerMsg.Handler_Errors_00001);
             }
             catch (Exception ex)
             {
@@ -53,12 +54,12 @@ namespace Domain.Commands.Handlers
             var isUserExist = await _userRepository.GetById(userId);
 
             if (isUserExist is null)
-                throw new Exception("O Usuário informado não existe");
+                throw new Exception(HandlerMsg.Handler_NotSuccess_Validations_00001);
 
             var isOrderOpen = await _orderRepository.GetOpenOrderByUserId(userId);
 
             if (!(isOrderOpen is null))
-                throw new Exception(string.Format("O Usuário não pode ser removido enquanto tiver a ordem {0} aberta", isOrderOpen.Id));
+                throw new Exception(string.Format(DeleteUserMsg.DeleteUser_NotSuccess_0001, isOrderOpen.Id));
 
             return isUserExist;
         }

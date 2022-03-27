@@ -59,5 +59,23 @@ namespace Domain.Language.TriManiaV1 {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Esse login já existe.
+        /// </summary>
+        internal static string CreateUser_NotSuccess_0001 {
+            get {
+                return ResourceManager.GetString("CreateUser_NotSuccess_0001", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Esse CPF/CNPJ  já foi cadastrado.
+        /// </summary>
+        internal static string CreateUser_NotSuccess_0002 {
+            get {
+                return ResourceManager.GetString("CreateUser_NotSuccess_0002", resourceCulture);
+            }
+        }
     }
 }
